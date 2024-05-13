@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { PrismaClient } from "@prisma/client";
 
-import { env } from "~/env";
-
-const createPrismaClient = () =>
-  new PrismaClient({
-    log:
-      env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-  });
-
-const globalForPrisma = globalThis as unknown as {
-  prisma: ReturnType<typeof createPrismaClient> | undefined;
+const prismaClientSingleton = () => {
+  return new PrismaClient();
 };
 
-export const db = globalForPrisma.prisma ?? createPrismaClient();
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents, no-var
+  var prisma: undefined | ReturnType<typeof prismaClientSingleton>;
+}
 
-if (env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+const prisma = globalThis.prisma ?? prismaClientSingleton();
+
+export default prisma;
+
+if (process.env.NODE_ENV !== "production") globalThis.prisma = prisma;
