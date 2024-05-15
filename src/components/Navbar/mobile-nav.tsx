@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
-import { X } from "lucide-react";
+import { X, CircleUser } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 //#FDF4F3
@@ -104,7 +104,11 @@ export const MobileNav = () => {
       <div>
         <Image src="/logo.svg" alt="Logo" width={100} height={100} />
       </div>
-      <div>login register</div>
+      <div>
+        <Link href="/login">
+          <CircleUser className="h-8 w-8" />
+        </Link>
+      </div>
     </div>
   );
 };
