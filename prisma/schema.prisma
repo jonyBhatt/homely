@@ -17,11 +17,19 @@ type Address {
     zip    String
 }
 
+enum UserRole {
+    Admin
+    Landlord
+    User
+}
+
 model User {
-    id      String   @id @default(auto()) @map("_id") @db.ObjectId
-    email   String   @unique
-    name    String?
-    address Address?
+    id       String   @id @default(auto()) @map("_id") @db.ObjectId
+    email    String   @unique
+    name     String?
+    address  Address?
+    password String?
+    role     UserRole @default(User)
 
     @@map("users")
 }

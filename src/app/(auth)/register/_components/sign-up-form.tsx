@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
+import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -17,30 +18,38 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
-import { Separator } from "~/components/ui/separator";
 
-import { signInSchema, signUpSchema } from "~/utils/validation";
+import { signUpSchema } from "~/utils/validation";
+import { Register } from "~/server/action/auth";
 
 export const SignUpForm = () => {
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      fullName:"",
+      fullName: "",
       email: "",
       password: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof signUpSchema>) {
+  async function onSubmit(values: z.infer<typeof signUpSchema>) {
     console.log(values);
+    try {
+      const res = await Register(values);
+      if (res?.message) {
+        toast.success(res.message);
+        form.reset()
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   }
   return (
     <div className="">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          
-        <FormField
+          <FormField
             control={form.control}
             name="fullName"
             render={({ field }) => (
@@ -53,7 +62,7 @@ export const SignUpForm = () => {
               </FormItem>
             )}
           />
-          
+
           <FormField
             control={form.control}
             name="email"
@@ -75,7 +84,11 @@ export const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="Enter Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="Enter Password"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
