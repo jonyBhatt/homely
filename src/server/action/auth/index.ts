@@ -1,4 +1,4 @@
-"use server"
+"use server";
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -18,6 +18,17 @@ export const Register = async (values: z.infer<typeof signUpSchema>) => {
 
   const genSalt = await bcrypt.genSalt(10);
   const hashPass = await bcrypt.hash(password, genSalt);
+
+  /**
+   * Find Existing User
+   */
+  const existingUser = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+
+  if (existingUser) return { error: "User already exists!" };
 
   try {
     await prisma.user.create({
