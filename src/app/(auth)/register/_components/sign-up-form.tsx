@@ -19,24 +19,41 @@ import {
 import { Input } from "~/components/ui/input";
 import { Separator } from "~/components/ui/separator";
 
-import { signInSchema } from "~/utils/validation";
+import { signInSchema, signUpSchema } from "~/utils/validation";
 
-export const SignInForm = () => {
-  const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+export const SignUpForm = () => {
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      fullName:"",
       email: "",
+      password: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof signInSchema>) {
+  function onSubmit(values: z.infer<typeof signUpSchema>) {
     console.log(values);
   }
   return (
     <div className="">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          
+        <FormField
+            control={form.control}
+            name="fullName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter full name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
           <FormField
             control={form.control}
             name="email"
@@ -44,7 +61,7 @@ export const SignInForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter Email" {...field} />
+                  <Input type="email" placeholder="Enter Email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -58,7 +75,7 @@ export const SignInForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter Password" {...field} />
+                  <Input type="password" placeholder="Enter Password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -69,7 +86,7 @@ export const SignInForm = () => {
             size="lg"
             className="flex w-full items-center gap-2 rounded-xl text-xl"
           >
-            Sign in
+            Create Account
             <ArrowUpRight className="h-6 w-6" />
           </Button>
         </form>
@@ -91,10 +108,10 @@ export const SignInForm = () => {
       </div>
       <div className="flex items-center justify-center  gap-2">
         <span className="text-sm tracking-wide text-muted-foreground">
-          Not signed up?
+          Already Have an Account?
         </span>
-        <Link href="/register" className="font-bold">
-          Create an account
+        <Link href="/sign-up" className="font-bold">
+          Login
         </Link>
       </div>
     </div>
