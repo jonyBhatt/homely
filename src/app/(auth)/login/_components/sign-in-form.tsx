@@ -7,8 +7,9 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
-import { CustomError } from "~/components/custom-error";
+import { signIn } from "next-auth/react";
 
+import { CustomError } from "~/components/custom-error";
 import { Button } from "~/components/ui/button";
 import {
   Form,
@@ -23,6 +24,7 @@ import { Separator } from "~/components/ui/separator";
 import { login } from "~/server/action/auth";
 
 import { signInSchema } from "~/utils/validation";
+import { DEFAULT_LOGIN_REDIRECT } from "~/utils/routes";
 
 export const SignInForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -47,6 +49,11 @@ export const SignInForm = () => {
       });
     });
   }
+  const googleSignIn = async () => {
+    await signIn("google", {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+    });
+  };
   return (
     <div className="">
       <Form {...form}>
@@ -103,6 +110,7 @@ export const SignInForm = () => {
         <Button
           className="flex w-full items-center justify-start gap-24 rounded-xl text-center text-xl lg:gap-32"
           size="lg"
+          onClick={() => googleSignIn()}
         >
           <Image src="/social/google.svg" alt="google" width={30} height={30} />
           <span>Continue with Google</span>
