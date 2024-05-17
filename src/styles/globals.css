@@ -75,3 +75,10 @@
   }
 }
 
+.hero-bg{
+  background: url('/images/hero.jpg');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
