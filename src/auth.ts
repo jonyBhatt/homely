@@ -7,7 +7,7 @@ import Google from "next-auth/providers/google";
 import prisma from "./server/db";
 
 import { getUserByEmail, getUserById } from "./server/action/user";
-import { type UserRole } from "@prisma/client";
+import { UserRole } from "@prisma/client";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
