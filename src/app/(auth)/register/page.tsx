@@ -26,7 +26,6 @@ export default function SignUpPage() {
           alt="login-bg"
           width={1000}
           height={100}
-          objectFit="cover"
         />
       </div>
     </section>

@@ -4,8 +4,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { type z } from "zod";
+import { CustomError } from "~/components/custom-error";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -18,20 +20,32 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Separator } from "~/components/ui/separator";
+import { login } from "~/server/action/auth";
 
 import { signInSchema } from "~/utils/validation";
 
 export const SignInForm = () => {
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
+      password: "",
     },
   });
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof signInSchema>) {
     console.log(values);
+    startTransition(async () => {
+      await login(values).then((data) => {
+        if (data?.error) {
+          setError(data?.error);
+        }
+      });
+    });
   }
   return (
     <div className="">
@@ -58,12 +72,17 @@ export const SignInForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter Password" {...field} />
+                  <Input
+                    type="password"
+                    placeholder="Enter Password"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+          {error && <CustomError message={error} />}
           <Button
             type="submit"
             size="lg"

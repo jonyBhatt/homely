@@ -21,8 +21,15 @@ import { Input } from "~/components/ui/input";
 
 import { signUpSchema } from "~/utils/validation";
 import { Register } from "~/server/action/auth";
+import { useState } from "react";
+import { FormSuccessMessage } from "~/components/seccess-message";
+import { CustomError } from "~/components/custom-error";
+import { useRouter } from "next/navigation";
 
 export const SignUpForm = () => {
+  const router = useRouter() 
+  const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -35,15 +42,20 @@ export const SignUpForm = () => {
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof signUpSchema>) {
     console.log(values);
-    try {
-      const res = await Register(values);
-      if (res?.message) {
-        toast.success(res.message);
-        form.reset()
+    setSuccess("");
+    setError("");
+
+    await Register(values).then((data) => {
+      if (data?.error) {
+        setError(data?.error);
+        setSuccess("");
+      } else {
+        setError("");
+        setSuccess(data?.message);
+        form.reset();
+        router.push("/login")
       }
-    } catch (error) {
-      toast.error("Something went wrong");
-    }
+    });
   }
   return (
     <div className="">
@@ -94,6 +106,10 @@ export const SignUpForm = () => {
               </FormItem>
             )}
           />
+          <div className="my-4">
+            {success && <FormSuccessMessage message={success} />}
+            {error && <CustomError message={error} />}
+          </div>
           <Button
             type="submit"
             size="lg"

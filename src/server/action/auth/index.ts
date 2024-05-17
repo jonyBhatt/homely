@@ -5,7 +5,9 @@
 import prisma from "~/server/db";
 import type * as z from "zod";
 import bcrypt from "bcryptjs";
-import { signUpSchema } from "~/utils/validation";
+import { signInSchema, signUpSchema } from "~/utils/validation";
+import { signIn } from "~/auth";
+import { AuthError } from "next-auth";
 
 export const Register = async (values: z.infer<typeof signUpSchema>) => {
   const validateFields = signUpSchema.safeParse(values);
@@ -35,7 +37,7 @@ export const Register = async (values: z.infer<typeof signUpSchema>) => {
       data: {
         name: fullName,
         email,
-        password: hashPass,
+        password:hashPass,
       },
     });
     return {
@@ -43,5 +45,29 @@ export const Register = async (values: z.infer<typeof signUpSchema>) => {
     };
   } catch (error) {
     return null;
+  }
+};
+
+export const login = async (values: z.infer<typeof signInSchema>) => {
+  const validateFields = signInSchema.safeParse(values);
+  if (!validateFields.success) {
+    return { error: "Invalid fields" };
+  }
+  const { email, password } = validateFields.data;
+  try {
+    await signIn("credentials", {
+      email,
+      password,
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      switch (error.type) {
+        case "CredentialsSignin":
+          return { error: "Invalid Credentials" };
+        default:
+          return { error: "Something went wrong!" };
+      }
+    }
+    throw error;
   }
 };

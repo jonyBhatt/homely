@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
+import { type Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
-export const DesktopNav = () => {
+export const DesktopNav = ({ session }: { session: Session | null }) => {
   const [isScroll, setIsScroll] = useState(false);
   const handleScroll = () => {
     if (window.scrollY >= window.innerHeight) {
@@ -24,7 +26,7 @@ export const DesktopNav = () => {
 
   return (
     <div
-      className={` flex w-full items-center justify-between ${isScroll ? "fixed top-0 bg-white animate-accordion-down" : "bg-transparent text-white"}`}
+      className={` flex w-full items-center justify-between ${isScroll ? "fixed top-0 animate-accordion-down bg-white" : "bg-transparent text-white"}`}
     >
       <div>
         {isScroll ? (
@@ -64,13 +66,22 @@ export const DesktopNav = () => {
         </Link>
       </div>
       <div className="flex items-center gap-7">
-        <Link href={"/login"} className="flex items-center gap-1">
-          <CircleUser
-            className={`h-6 w-6 ${isScroll ? "text-primary" : "text-white"} `}
-          />
-          {/* <Link href={"/login"}>Login</Link> */}
-          <p>Login</p>
-        </Link>
+        {session?.user ? (
+          <>
+            <Button onClick={() => signOut()}>Sign Out</Button>
+          </>
+        ) : (
+          <>
+            <Link href={"/login"} className="flex items-center gap-1">
+              <CircleUser
+                className={`h-6 w-6 ${isScroll ? "text-primary" : "text-white"} `}
+              />
+              {/* <Link href={"/login"}>Login</Link> */}
+              <p>Login</p>
+            </Link>
+          </>
+        )}
+
         <Button
           size={"lg"}
           className="flex items-center gap-2.5 rounded-full border border-primary-foreground bg-transparent px-6 py-2"

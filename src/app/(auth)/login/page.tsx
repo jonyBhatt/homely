@@ -21,13 +21,7 @@ export default function LoginPage() {
         </div>
       </div>
       <div className="absolute bottom-0 right-0 -z-10">
-        <Image
-          src="/login-bg.svg"
-          alt="login-bg"
-          width={1000}
-          height={100}
-          objectFit="cover"
-        />
+        <Image src="/login-bg.svg" alt="login-bg" width={1000} height={100} />
       </div>
     </section>
   );

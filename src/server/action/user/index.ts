@@ -43,7 +43,7 @@ export const getUserById = async (id: string) => {
         id,
       },
     });
-    return user;
+    return {user};
   } catch (error) {
     return null;
   }
