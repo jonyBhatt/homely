@@ -32,7 +32,7 @@ model User {
     password      String?
     accounts      Account[]
     sessions      Session[]
-
+    role          UserRole @default(User)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
