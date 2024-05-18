@@ -1,6 +1,6 @@
-import "~/styles/globals.css";
+import { Poppins } from "next/font/google";
 import { Toaster } from "sonner";
-import { GeistSans } from "geist/font/sans";
+import "~/styles/globals.css";
 
 export const metadata = {
   title: "Homely",
@@ -8,13 +8,15 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
+const poppins = Poppins({ subsets: ["latin"], variable: "--inter", weight:['100',"200","300","400", "500","600","700","800"] });
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en" className={`${poppins.className}`}>
       <body>
         {children}
         <Toaster richColors />
