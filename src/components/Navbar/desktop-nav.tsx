@@ -10,7 +10,7 @@ import { signOut } from "next-auth/react";
 export const DesktopNav = ({ session }: { session: Session | null }) => {
   const [isScroll, setIsScroll] = useState(false);
   const handleScroll = () => {
-    if (window.scrollY >= window.innerHeight) {
+    if (window.scrollY >= 20) {
       setIsScroll(true);
     } else {
       setIsScroll(false);
@@ -26,7 +26,7 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
 
   return (
     <div
-      className={` flex w-full items-center justify-between ${isScroll ? "fixed top-0 animate-accordion-down bg-white" : "bg-transparent text-white"}`}
+      className={` flex w-full items-center justify-between ${isScroll ? " sticky top-0 h-full w-full rounded-md border-0 bg-gray-500 bg-opacity-10 bg-clip-padding px-4 py-2 text-white backdrop-blur-sm backdrop-filter " : "bg-transparent text-white"}`}
     >
       <div>
         {isScroll ? (
@@ -35,7 +35,7 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
           </>
         ) : (
           <>
-            <Image src="/scroll-logo.svg" alt="logo" width={80} height={80} />
+            <Image src="/logo.svg" alt="logo" width={80} height={80} />
           </>
         )}
       </div>

@@ -5,7 +5,7 @@ import { MobileNav } from "./mobile-nav";
 export const Navbar = async () => {
   const session = await auth();
   return (
-    <nav className=" fixed top-0 z-10 w-full py-6 ">
+    <nav className="fixed top-0 z-10 w-full py-6  ">
       <div className="container mx-auto">
         {/** Desktop Screen */}
         <div className="hidden lg:flex">
