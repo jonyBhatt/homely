@@ -23,7 +23,7 @@ export const HelpSection = () => {
               height={100}
             />
             <h4 className="font-medium">Buy a Property</h4>
-            <span className="text-wrap text-center font-normal">
+            <span className="text-wrap text-gray-500 text-sm text-center font-normal">
               Nullam sollicitudin blandit eros eu pretium. Nullam maximus
               ultricies auctor.
             </span>
@@ -45,7 +45,7 @@ export const HelpSection = () => {
               height={100}
             />
             <h4 className="font-medium">Sell a Property</h4>
-            <span className="text-wrap text-center font-normal">
+            <span className="text-wrap text-gray-500 text-sm text-center font-normal">
               Nullam sollicitudin blandit eros eu pretium. Nullam maximus
               ultricies auctor.
             </span>
@@ -67,7 +67,7 @@ export const HelpSection = () => {
               height={100}
             />
             <h4 className="font-medium">Rent a Property</h4>
-            <span className="text-wrap text-center font-normal">
+            <span className="text-wrap text-gray-500 text-sm text-center font-normal">
               Nullam sollicitudin blandit eros eu pretium. Nullam maximus
               ultricies auctor.
             </span>
