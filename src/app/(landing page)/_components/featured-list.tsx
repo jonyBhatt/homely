@@ -27,7 +27,7 @@ export const FeaturedList = () => {
             <ArrowUpRight className="h-4 w-4 transition-colors duration-100 ease-in-out hover:text-primary/50" />
           </Link>
         </div>
-        <div className="my-16 flex items-center gap-8 justify-center">
+        <div className="my-16 flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           {/** Items */}
           {featured.map((data) => (
             <div key={data.id}>

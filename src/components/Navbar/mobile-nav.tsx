@@ -1,3 +1,4 @@
+"use client"
 import { TextAlignLeftIcon } from "@radix-ui/react-icons";
 import {
   Sheet,
@@ -11,10 +12,26 @@ import {
 import { X, CircleUser } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 //#FDF4F3
 export const MobileNav = () => {
+  const [isScroll, setIsScroll] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY >= 20) {
+      setIsScroll(true);
+    } else {
+      setIsScroll(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
   return (
-    <div className="flex w-full items-center justify-between ">
+    <div className={` ${isScroll ? " sticky top-0 h-full w-full rounded-md border-0 bg-gray-500 bg-opacity-10 bg-clip-padding px-4 py-2 text-white backdrop-blur-sm backdrop-filter " : "bg-transparent text-white"} flex w-full items-center justify-between  `}>
       <Sheet>
         <SheetTrigger>
           <TextAlignLeftIcon className="h-8 w-8" />
