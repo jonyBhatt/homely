@@ -68,10 +68,26 @@
 
 @layer base {
   * {
-    @apply scroll-smooth border-border;
+    @apply appearance-none  scroll-smooth border-border md:appearance-auto;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  ::-webkit-scrollbar {
+    /* Customize the scrollbar width */
+    @apply w-0 md:w-1;
+  }
+  ::-webkit-scrollbar-track {
+    /* Customize the scrollbar track */
+    @apply bg-primary;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    /* Customize the scrollbar thumb */
+    @apply bg-primary-foreground;
   }
 }
 

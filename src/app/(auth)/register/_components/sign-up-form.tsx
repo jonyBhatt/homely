@@ -140,7 +140,7 @@ export const SignUpForm = () => {
           onClick={() => googleSignIn()}
         >
           <Image src="/social/google.svg" alt="google" width={30} height={30} />
-          <span className="lg:-ml-24 hidden text-lg md:inline-block">
+          <span className="lg:-ml-32 hidden text-lg md:inline-block">
             Continue with Google
           </span>
         </Button>
