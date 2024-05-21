@@ -14,7 +14,7 @@ export const Hero = () => {
               We’ve more than 745,000 apartments, place & plot.
             </p>
           </div>
-          <div className="my-4 hidden px-36 md:flex">
+          <div className="my-4 hidden px-36 md:block">
             <SearchFilter />
           </div>
         </div>
