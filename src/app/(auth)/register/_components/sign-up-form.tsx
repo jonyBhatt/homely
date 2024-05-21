@@ -25,9 +25,11 @@ import { useState } from "react";
 import { FormSuccessMessage } from "~/components/seccess-message";
 import { CustomError } from "~/components/custom-error";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { DEFAULT_LOGIN_REDIRECT } from "~/utils/routes";
 
 export const SignUpForm = () => {
-  const router = useRouter() 
+  const router = useRouter();
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const form = useForm<z.infer<typeof signUpSchema>>({
@@ -53,10 +55,15 @@ export const SignUpForm = () => {
         setError("");
         setSuccess(data?.message);
         form.reset();
-        router.push("/login")
+        router.push("/login");
       }
     });
   }
+  const googleSignIn = async () => {
+    await signIn("google", {
+      callbackUrl: DEFAULT_LOGIN_REDIRECT,
+    });
+  };
   return (
     <div className="">
       <Form {...form}>
@@ -128,18 +135,21 @@ export const SignUpForm = () => {
       </div>
       <div className="my-4">
         <Button
-          className="flex w-full items-center justify-start gap-24 rounded-xl text-center text-xl lg:gap-32"
+          className="flex w-full items-center justify-center gap-8 lg:justify-around"
           size="lg"
+          onClick={() => googleSignIn()}
         >
           <Image src="/social/google.svg" alt="google" width={30} height={30} />
-          <span>Continue with Google</span>
+          <span className="lg:-ml-24 hidden text-lg md:inline-block">
+            Continue with Google
+          </span>
         </Button>
       </div>
       <div className="flex items-center justify-center  gap-2">
         <span className="text-sm tracking-wide text-muted-foreground">
           Already Have an Account?
         </span>
-        <Link href="/sign-up" className="font-bold">
+        <Link href="/login" className="font-bold">
           Login
         </Link>
       </div>

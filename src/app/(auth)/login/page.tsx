@@ -10,17 +10,17 @@ export default function LoginPage() {
             <Image src="/logo.svg" alt="logo" width={100} height={80} />
             <div className="flex flex-col items-center gap-1">
               <h2 className="text-2xl font-bold tracking-wide">Sign In</h2>
-              <span className="text-base font-normal text-muted-foreground">
+              <span className="text-center text-sm font-light text-muted-foreground">
                 Sign in with this account across the following sites.
               </span>
             </div>
           </div>
-          <div className="w-full overflow-hidden rounded bg-white px-4 py-8 lg:w-1/2">
+          <div className="w-[380px] md:w-full overflow-hidden rounded bg-white px-4 py-8  lg:w-1/2">
             <SignInForm />
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 right-0 -z-10">
+      <div className="absolute -bottom-10 right-0 -z-10 md:bottom-0">
         <Image src="/login-bg.svg" alt="login-bg" width={1000} height={100} />
       </div>
     </section>

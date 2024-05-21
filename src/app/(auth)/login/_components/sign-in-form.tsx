@@ -55,7 +55,7 @@ export const SignInForm = () => {
     });
   };
   return (
-    <div className="">
+    <div className="w-full">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -108,12 +108,12 @@ export const SignInForm = () => {
       </div>
       <div className="my-4">
         <Button
-          className="flex w-full items-center justify-start gap-24 rounded-xl text-center text-xl lg:gap-32"
+          className="flex w-full items-center justify-center lg:justify-around gap-8"
           size="lg"
           onClick={() => googleSignIn()}
         >
           <Image src="/social/google.svg" alt="google" width={30} height={30} />
-          <span>Continue with Google</span>
+          <span className="hidden md:inline-block -ml-24 text-lg">Continue with Google</span>
         </Button>
       </div>
       <div className="flex items-center justify-center  gap-2">
