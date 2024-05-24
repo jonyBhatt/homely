@@ -3,6 +3,7 @@ import { ExploreApartments } from "./_components/explore";
 import { FeaturedList } from "./_components/featured-list";
 import { HelpSection } from "./_components/help";
 import { Hero } from "./_components/hero";
+import { Testimonial } from "./_components/testimonial";
 
 export default function HomePage() {
   return (
@@ -12,6 +13,7 @@ export default function HomePage() {
       <HelpSection />
       <FeaturedList />
       <CityProperty />
+      <Testimonial />
     </main>
   );
 }
