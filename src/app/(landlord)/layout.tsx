@@ -12,7 +12,9 @@ export default function LandlordDashboardLayout({
         <LandLordSideBar />
         {/* <p>Side bar</p> */}
       </div>
-      <div className=" flex-1 p-6">{children}</div>
+      <div className=" flex-1 overflow-hidden overflow-y-scroll p-6">
+        {children}
+      </div>
     </div>
   );
 }

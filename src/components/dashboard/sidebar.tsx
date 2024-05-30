@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 import { CiLogout } from "react-icons/ci";
 import Link from "next/link";
 import { cn } from "~/lib/utils";
-
+import { usePathname } from "next/navigation";
 interface SideBarProps {
   role: "Admin" | "Landlord" | "User";
   className?: string;
@@ -16,6 +16,7 @@ const logOut = async () => {
 };
 
 export const SideBar = ({ role, className }: SideBarProps) => {
+  const pathname = usePathname();
   return (
     <aside
       className={cn(
@@ -28,7 +29,7 @@ export const SideBar = ({ role, className }: SideBarProps) => {
           <Link
             href={ctx.path}
             key={ctx.title}
-            className="group mb-6 flex w-full items-start rounded-lg px-4 py-4 transition-colors duration-100 ease-in-out hover:bg-muted"
+            className={`group mb-6 flex w-full items-start rounded-lg px-4 py-4 transition-colors duration-100 ease-in-out hover:bg-muted ${ctx.path === pathname ?"bg-primary text-white":""}`}
           >
             <span className="text-2xl group-hover:text-primary">
               {ctx.icon}
