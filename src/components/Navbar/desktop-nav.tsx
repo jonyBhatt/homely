@@ -91,9 +91,28 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
               <DropdownMenuContent>
                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem>Profile</DropdownMenuItem>
-                <DropdownMenuItem>Billing</DropdownMenuItem>
-                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Link href={"/me"}>Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link href="/">My Properties</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Link href="/">My Wishlist</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                {session.user.role === "Admin" && (
+                  <DropdownMenuItem>
+                    <Link href="/a-dashboard">Dashboard</Link>
+                  </DropdownMenuItem>
+                )}
+                {session.user.role === "Landlord" && (
+                  <DropdownMenuItem>
+                    <Link href="/l-dashboard">My Dashboard</Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem>
                   <Button onClick={() => signOut()}>Sign Out</Button>
                 </DropdownMenuItem>
