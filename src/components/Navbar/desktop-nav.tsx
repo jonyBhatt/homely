@@ -7,6 +7,17 @@ import { useEffect, useState } from "react";
 import { type Session } from "next-auth";
 import { signOut } from "next-auth/react";
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "~/components/ui/dropdown-menu";
+
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+
 export const DesktopNav = ({ session }: { session: Session | null }) => {
   const [isScroll, setIsScroll] = useState(false);
   const handleScroll = () => {
@@ -68,7 +79,28 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
       <div className="flex items-center gap-7">
         {session?.user ? (
           <>
-            <Button onClick={() => signOut()}>Sign Out</Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Avatar>
+                  <AvatarImage src={session.user.image!} />
+                  <AvatarFallback className="bg-gray-600">
+                    {session.user.name?.slice(0, 1)}
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuItem>Billing</DropdownMenuItem>
+                <DropdownMenuItem>Team</DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Button onClick={() => signOut()}>Sign Out</Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* <Button onClick={() => signOut()}>Sign Out</Button> */}
           </>
         ) : (
           <>
