@@ -7,7 +7,8 @@
 import type { Property } from "@prisma/client";
 import prisma from "~/server/db";
 import { propertySchema } from "~/utils/validation";
-import * as z  from 'zod'
+import * as z from "zod";
+import { getCurrentUser } from "../user";
 
 export const getProperties = async (): Promise<Property[] | { error: any }> => {
   try {
@@ -24,6 +25,10 @@ export const getProperties = async (): Promise<Property[] | { error: any }> => {
 };
 
 export const addProperty = async (values: z.infer<typeof propertySchema>) => {
+  const user = await getCurrentUser();
+  if (!user?.id) {
+    return null;
+  }
   const fieldValues = propertySchema.safeParse(values);
 
   if (fieldValues.error) {
@@ -65,6 +70,7 @@ export const addProperty = async (values: z.infer<typeof propertySchema>) => {
         country,
         image,
         state,
+        userId: user.id,
       },
     });
     return {

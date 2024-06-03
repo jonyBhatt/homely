@@ -8,4 +8,6 @@
 
 ## On going user story
 
-- Add property
+[x] Add property
+[] Show My 
+ 
