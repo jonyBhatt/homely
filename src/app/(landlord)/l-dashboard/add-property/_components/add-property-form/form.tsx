@@ -10,6 +10,7 @@ import { propertySchema } from "~/utils/validation";
 import DescriptionForm from "./description-form";
 import LocationForm from "./location-form";
 import DetailsForm from "./details-form";
+import MediaUploadForm from "./media";
 
 interface ActiveForm {
   activeForm: string;
@@ -21,24 +22,25 @@ export const PropertyForm = ({ activeForm }: ActiveForm) => {
     defaultValues: {
       title: "",
       description: "",
-      price: 0,
+      price: "",
       category: "",
-      bedrooms: 0,
-      bathrooms: 0,
+      bedrooms: "",
+      bathrooms: "",
       image: "",
       address: "",
       city: "",
       country: "Bangladesh",
-      garage: 0,
-      rooms: 0,
-      size: 0,
+      garage: "",
+      rooms: "",
+      size: "",
       state: "",
-      zip: "",
+      // zip: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof propertySchema>) {
     console.log(values);
+    console.log(values.image);
   }
 
   return (
@@ -47,6 +49,7 @@ export const PropertyForm = ({ activeForm }: ActiveForm) => {
         {activeForm === "description" && <DescriptionForm form={form} />}
         {activeForm === "location" && <LocationForm form={form} />}
         {activeForm === "detail" && <DetailsForm form={form} />}
+        {activeForm === "media" && <MediaUploadForm form={form} />}
         {activeForm === "detail" && (
           <Button type="submit" className="w-full">
             Add Property

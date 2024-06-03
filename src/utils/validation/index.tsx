@@ -30,20 +30,20 @@ export const signUpSchema = z.object({
 export const propertySchema = z.object({
   title: z.string().min(1, { message: "Title is required" }),
   description: z.string().min(1, { message: "Description is required" }),
-  price: z.number().min(1, { message: "Price is required" }),
-  category: z.string().min(1, { message: "Category is required" }),
+  price: z.string(),
+  category: z.string(),
 
-  rooms: z.number().min(1, { message: "Bedrooms is required" }),
-  bedrooms: z.number().min(1, { message: "Bedrooms is required" }),
-  bathrooms: z.number().min(1, { message: "Bathrooms is required" }),
-  garage: z.number().min(1, { message: "Bathrooms is required" }),
-  size: z.number().min(1, { message: "Size is required" }),
+  rooms: z.string() ,
+  bedrooms: z.string() ,
+  bathrooms: z.string(),
+  garage: z.string(),
+  size: z.string(),
 
   image: z.string().optional(),
 
   address: z.string().min(1, { message: "Address is required" }),
   city: z.string().min(1, { message: "City is required" }),
-  zip: z.string().min(1, { message: "Zip is required" }),
+  // zip: z.string().min(1, { message: "Zip is required" }),
   state: z.string().optional(),
   country: z.string().optional(),
 });
