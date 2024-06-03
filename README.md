@@ -1,39 +1,46 @@
-# Its a final year project
+# Homely - Real Estate Simplified 🏡
 
-## Complete User story
+**Homely** is a modern real estate platform built using the MERN stack, designed to streamline the rental process for landlords, tenants, and administrators. With a focus on user experience, Homely offers a comprehensive suite of features to facilitate property management, tenant-landlord interactions, and administrative oversight.
 
-1. [x] Home page
-2. [x] Authentication
-3. [x] Landlord add property
+## Features
 
-## On going user story
+### For Landlords 🏘️
 
-> ### Landlord
+- **Add Property**: Easily list properties with detailed descriptions, photos, and amenities.
+- **View Properties**: Access a comprehensive list of all your properties with detailed information.
+- **Manage Bookings**: Accept or reject booking requests and manage the availability of your properties.
+- **Online Rent Payments**: Collect rent through integrated online payment systems.
 
-4.  [] Landlord can see property
-5.  [] Landlords to manage bookings and availability of their properties.
-6.  [] Integrate online rent payment systems to allow landlords to collect rent through the platform.
+### For Tenants 🏠
 
-> ### Tenants
+- **Booking Requests**: Send booking requests or schedule property viewings.
+- **Reviews and Ratings**: Leave reviews and rate properties and landlords.
+- **Maintenance Reporting**: Report maintenance issues and track their resolution.
+- **Rental Applications**: Fill out and submit rental applications directly through the platform.
+- **Payment History**: Access your rent payment history and view upcoming payment schedules.
+- **Support/Help Desk**: Get assistance from the admin through the support feature.
 
-7.  [] Allow tenants to send booking requests or schedule property viewings.
-8.  [] Enable tenants to leave reviews and ratings for properties and landlords.
-9.  [] Provide a system for tenants to report maintenance issues and track the status of their requests.
-10. [] Allow tenants to fill out and submit rental applications directly through the website.
-11. [] Provide tenants with access to their rent payment history and upcoming payment schedules.
-12. [] Offer a support or help desk feature where tenants can ask questions or get assistance by admin.
+### For Admins 👨‍💼
 
-> ### Admin
+- **Manage User Accounts**: Admins can manage user registrations, profiles, and permissions.
+- **Property Approval**: Review and approve property listings before they go live.
+- **Help Desk Review**: Monitor and respond to queries submitted through the help desk.
 
-13. [] Enable admins to manage user accounts.
-14. [] Implement a property approval system where admins can review and approve property listings before they go live.
-15. [] Admin can review the help desk feature where tenants ask question
+### Additional Features 🌟
 
-> ### Others
+- **Search Functionality**: Filter properties by location, price, and other criteria.
+- **Google Maps Integration**: Display property locations using Google Maps.
+- **Notification System**: Send reminders and updates to users.
+- **Agent Hiring**: Landlords can hire agents to help sell their properties.
+- **Agent Rating System**: Users can rate and review agents.
+- **Referral Program**: Encourage users to invite friends and earn rewards.
 
-16. [] Implement a search feature that allows users to filter properties by location, price, and other
-17. [] Integrate Google Maps to display property locations.
-18. [] Implement a notification system that sends reminders and updates to users.
-19. [] Landlord can hire agents for his property sell
-20. [] Implement a rating system for agents
-21. [] Create a referral program to encourage users to invite friends and earn rewards.
+## Design and User Experience 🎨
+
+- **Consistent Layout**: Ensures a cohesive look and feel across all pages.
+- **Responsive Design**: Accessible on desktops, tablets, and mobile devices.
+- **Intuitive Navigation**: Clear and straightforward navigation for ease of use.
+- **Visual Appeal**: High-quality images and engaging graphics.
+- **Interactive Elements**: Enhance engagement with interactive buttons, forms, and modals.
+
+Homely aims to provide a seamless and enjoyable experience for all users, simplifying the complexities of real estate management and transactions.
