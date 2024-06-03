@@ -13,7 +13,6 @@ type FormValues = {
   size: string;
   address: string;
   city: string;
-  // zip: string;
   image?: string | undefined;
   state?: string | undefined;
   country?: string | undefined;
