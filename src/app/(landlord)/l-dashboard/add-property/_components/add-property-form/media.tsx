@@ -18,7 +18,10 @@ export default function MediaUploadForm({ form }: { form: FormPropsTypes }) {
         render={({ field }) => (
           <FormItem>
             <FormControl>
-              <UploadButton onChange={field.onChange} />
+              <UploadButton
+                onChange={field.onChange}
+                text="Upload property images"
+              />
             </FormControl>
             <FormMessage />
           </FormItem>

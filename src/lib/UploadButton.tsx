@@ -6,8 +6,9 @@ import { CldUploadButton } from "next-cloudinary";
 interface UploadProps {
   onChange: (url?: string) => void;
   className?: string;
+  text:string
 }
-export default function UploadButton({ onChange, className }: UploadProps) {
+export default function UploadButton({ onChange, className, text }: UploadProps) {
   return (
     <CldUploadButton
       uploadPreset="c2jrssik"
@@ -22,7 +23,7 @@ export default function UploadButton({ onChange, className }: UploadProps) {
     >
       <span className={`${className}  flex items-center gap-4`}>
         <Upload className="h-4 w-4" />
-        Upload
+        {text}
       </span>
     </CldUploadButton>
   );
