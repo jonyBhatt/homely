@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
 
 import { Button } from "~/components/ui/button";
 import { Form } from "~/components/ui/form";
@@ -11,6 +12,7 @@ import DescriptionForm from "./description-form";
 import LocationForm from "./location-form";
 import DetailsForm from "./details-form";
 import MediaUploadForm from "./media";
+import { addProperty } from "~/server/action/property";
 
 interface ActiveForm {
   activeForm: string;
@@ -38,9 +40,18 @@ export const PropertyForm = ({ activeForm }: ActiveForm) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof propertySchema>) {
+  async function onSubmit(values: z.infer<typeof propertySchema>) {
     console.log(values);
-    console.log(values.image);
+    try {
+      const res = await addProperty(values);
+      if (res?.error) {
+        toast.error("Something went wrong!");
+      } else {
+        toast.success("Property added successfully");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
