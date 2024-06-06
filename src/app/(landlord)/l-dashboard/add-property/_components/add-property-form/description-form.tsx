@@ -55,6 +55,8 @@ export default function DescriptionForm({ form }: { form: FormPropsTypes }) {
         />
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+
+        {/** Category */}
         <FormField
           control={form.control}
           name="category"

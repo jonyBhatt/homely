@@ -14,6 +14,7 @@ async function MyProperty() {
         {properties.map((property) => (
           <PropertyCard
             key={property.id}
+            id={property.id}
             title={property.title}
             description={property.description}
             image={property.image ?? ""} // Assuming image can be null, so we use the empty string as a fallback
@@ -22,6 +23,7 @@ async function MyProperty() {
             state={property.state ?? ""} // Assuming state can be null, so we use the empty string as a fallback
             address={property.address}
             country={property.country ?? ""}
+            price={property.price}
           />
         ))}
       </div>

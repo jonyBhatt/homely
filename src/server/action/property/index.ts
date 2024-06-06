@@ -24,6 +24,7 @@ export const getProperties = async (): Promise<Property[] | { error: any }> => {
   }
 };
 
+// Add property to database
 export const addProperty = async (values: z.infer<typeof propertySchema>) => {
   const user = await getCurrentUser();
   if (!user?.id) {
@@ -71,6 +72,24 @@ export const addProperty = async (values: z.infer<typeof propertySchema>) => {
         image,
         state,
         userId: user.id,
+      },
+    });
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.log(error);
+    null;
+  }
+};
+
+// Delete properties form database
+
+export const deleteProperty = async (id: string) => {
+  try {
+    await prisma.property.delete({
+      where: {
+        id,
       },
     });
     return {
