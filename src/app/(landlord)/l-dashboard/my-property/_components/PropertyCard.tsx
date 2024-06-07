@@ -28,6 +28,10 @@ export const PropertyCard = ({
   state,
   address,
   country,
+  city,
+  garage,
+  rooms,
+  size,
 }: PropertyCardProps) => {
   const propertyDelete = async () => {
     const res = await deleteProperty(id);
@@ -83,6 +87,10 @@ export const PropertyCard = ({
                     address={address}
                     country={country ?? ""}
                     price={price}
+                    city={city}
+                    garage={garage}
+                    rooms={rooms}
+                    size={size}
                   />
                 </ScrollArea>
               </DialogContent>

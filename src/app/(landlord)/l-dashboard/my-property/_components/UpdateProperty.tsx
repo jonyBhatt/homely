@@ -26,6 +26,8 @@ import {
 } from "~/components/ui/select";
 import UploadButton from "~/lib/UploadButton";
 import { Textarea } from "~/components/ui/textarea";
+import { updateProperty } from "~/server/action/property";
+import { toast } from "sonner";
 
 export const UpdateProperty = ({
   title,
@@ -38,6 +40,10 @@ export const UpdateProperty = ({
   address,
   country,
   price,
+  city,
+  garage,
+  rooms,
+  size,
 }: PropertyCardProps) => {
   const form = useForm<z.infer<typeof propertySchema>>({
     resolver: zodResolver(propertySchema),
@@ -52,11 +58,26 @@ export const UpdateProperty = ({
       state: state,
       address: address,
       country: country,
+      city: city,
+      garage: garage,
+      rooms: rooms,
+      size: size,
+
+      // zip: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof propertySchema>) {
     console.log(values);
+    try {
+      const res = await updateProperty(id, values);
+      if (res?.success) {
+        toast.success("Property Updated!");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    }
   }
   return (
     <Form {...form}>
@@ -157,7 +178,7 @@ export const UpdateProperty = ({
             name="state"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>State</FormLabel>
+                <FormLabel>Area Name</FormLabel>
                 <FormControl>
                   <Input placeholder="bathrooms" {...field} />
                 </FormControl>
@@ -235,7 +256,7 @@ export const UpdateProperty = ({
             />
           </div>
         </div>
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="w-full text-lg">Update</Button>
       </form>
     </Form>
   );

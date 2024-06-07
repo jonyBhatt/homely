@@ -9,6 +9,7 @@ import prisma from "~/server/db";
 import { propertySchema } from "~/utils/validation";
 import * as z from "zod";
 import { getCurrentUser } from "../user";
+import { revalidatePath } from "next/cache";
 
 export const getProperties = async (): Promise<Property[] | { error: any }> => {
   try {
@@ -98,5 +99,49 @@ export const deleteProperty = async (id: string) => {
   } catch (error) {
     console.log(error);
     null;
+  }
+};
+
+// Update property
+export const updateProperty = async (
+  id: string,
+  values: z.infer<typeof propertySchema>,
+) => {
+  const fieldValues = propertySchema.safeParse(values);
+
+  if (fieldValues.error) {
+    return {
+      error: fieldValues.error.message,
+    };
+  }
+
+  try {
+    await prisma.property.update({
+      where: {
+        id,
+      },
+      data: {
+        address: fieldValues.data.address,
+        bathrooms: fieldValues.data.bathrooms,
+        bedrooms: fieldValues.data.bedrooms,
+        category: fieldValues.data.category,
+        city: fieldValues.data.city,
+        description: fieldValues.data.description,
+        garage: fieldValues.data.garage,
+        price: fieldValues.data.price,
+        rooms: fieldValues.data.rooms,
+        size: fieldValues.data.size,
+        title: fieldValues.data.title,
+        country: fieldValues.data.country,
+        image: fieldValues.data.image,
+        state: fieldValues.data.state,
+      },
+    });
+    revalidatePath("/l-dashboard/my-property");
+    return {
+      success: true,
+    };
+  } catch (error) {
+    return null;
   }
 };

@@ -8,5 +8,9 @@ export type PropertyCardProps = {
   state: string;
   address: string;
   country: string;
-  price?:string
+  price?: string;
+  city?: string;
+  garage?: string;
+  rooms?: string;
+  size?: string;
 };

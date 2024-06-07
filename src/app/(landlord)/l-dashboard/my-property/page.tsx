@@ -24,6 +24,10 @@ async function MyProperty() {
             address={property.address}
             country={property.country ?? ""}
             price={property.price}
+            city={property.city}
+            garage={property.garage}
+            size={property.size}
+            rooms={property.rooms}
           />
         ))}
       </div>
