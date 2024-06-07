@@ -81,10 +81,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.role = token.role as UserRole;
       }
 
-      console.log({
-        session_token: token,
-        session,
-      });
+      // 
 
       return session;
     },
