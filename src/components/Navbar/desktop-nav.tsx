@@ -1,11 +1,11 @@
 "use client";
-import { ArrowUpRight, CircleUser } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "../ui/button";
-import { useEffect, useState } from "react";
+import { CircleUser } from "lucide-react";
 import { type Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 import {
   DropdownMenu,
@@ -16,8 +16,8 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
-import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { usePathname } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 
 export const DesktopNav = ({ session }: { session: Session | null }) => {
   const pathname = usePathname();
@@ -36,6 +36,8 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+
+
 
   return (
     <div
