@@ -17,8 +17,10 @@ import {
 } from "~/components/ui/dropdown-menu";
 
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { usePathname } from "next/navigation";
 
 export const DesktopNav = ({ session }: { session: Session | null }) => {
+  const pathname = usePathname();
   const [isScroll, setIsScroll] = useState(false);
   const handleScroll = () => {
     if (window.scrollY >= 20) {
@@ -37,7 +39,7 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
 
   return (
     <div
-      className={` flex w-full items-center justify-between ${isScroll ? " sticky top-0 h-full w-full rounded-md border-0 bg-gray-500 bg-opacity-10 bg-clip-padding px-4 py-2 text-white backdrop-blur-sm backdrop-filter " : "bg-transparent text-white"}`}
+      className={` flex w-full items-center justify-between ${isScroll ? " sticky top-0 h-full w-full rounded-md border-0 bg-gray-500 bg-opacity-10 bg-clip-padding px-4 py-2 text-white backdrop-blur-sm backdrop-filter " : "bg-transparent text-white"}  `}
     >
       <div>
         {isScroll ? (
@@ -53,25 +55,25 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
       <div className="flex items-center gap-5">
         <Link
           href={"/"}
-          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} `}
+          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
         >
           Home
         </Link>
         <Link
-          href={"/"}
-          className={`px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"}`}
+          href={"/listing"}
+          className={`px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
         >
           Listing
         </Link>
         <Link
-          href={"/"}
-          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} `}
+          href={"/property"}
+          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
         >
           Property
         </Link>
         <Link
           href={"/"}
-          className={` px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"} `}
+          className={` px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
         >
           Pricing
         </Link>
@@ -133,13 +135,13 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
           </>
         )}
 
-        <Button
+        {/* <Button
           size={"lg"}
-          className="flex items-center gap-2.5 rounded-full border border-primary-foreground bg-transparent px-6 py-2"
+          className={`${pathname!== '/'?"text-black !border-black":""} flex items-center gap-2.5 rounded-full border border-primary-foreground bg-transparent px-6 py-2`}
         >
           Add Property
           <ArrowUpRight className="h-6 w-6" />
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
