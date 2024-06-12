@@ -10,6 +10,10 @@ const nextConfig = {
         hostname: "a0.muscache.com",
         protocol: "https",
       },
+      {
+        hostname: "img.freepik.com",
+        protocol: "https",
+      },
     ],
     domains: ["res.cloudinary.com"],
   },

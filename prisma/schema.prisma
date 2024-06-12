@@ -104,8 +104,23 @@ model Property {
     state       String? // Optional field
     country     String? // Optional field
 
-    userId String? @db.ObjectId
-    user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId   String?    @db.ObjectId
+    user     User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    schedule Schedule[]
 
     @@map("property")
+}
+
+model Schedule {
+    id         String   @id @default(auto()) @map("_id") @db.ObjectId
+    propertyId String   @db.ObjectId
+    property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+    username String
+    email    String
+    date     String
+
+    createdAt DateTime @default(now())
+
+    @@map("schedule")
 }

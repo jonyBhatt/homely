@@ -8,7 +8,7 @@ import type { Property } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import * as z from "zod";
 import prisma from "~/server/db";
-import { propertySchema } from "~/utils/validation";
+import { propertySchema, scheduleSchema } from "~/utils/validation";
 import { getCurrentUser } from "../user";
 
 export const getProperties = async (): Promise<Property[] | { error: any }> => {
@@ -138,6 +138,49 @@ export const updateProperty = async (
       },
     });
     revalidatePath("/l-dashboard/my-property");
+    return {
+      success: true,
+    };
+  } catch (error) {
+    return null;
+  }
+};
+
+// get properties by id
+export const getPropById = async (id: string) => {
+  if (!id) return { error: "Property does not exists! " };
+  try {
+    const property = await prisma.property.findUnique({
+      where: {
+        id,
+      },
+    });
+    return { property };
+  } catch (error) {
+    return null;
+  }
+};
+
+// Schedule
+export const makeSchedule = async (
+  id: string,
+  values: z.infer<typeof scheduleSchema>,
+) => {
+  const fieldValues = scheduleSchema.safeParse(values);
+  if (fieldValues.error) {
+    return {
+      error: fieldValues.error.message,
+    };
+  }
+  try {
+    await prisma.schedule.create({
+      data: {
+        propertyId: id,
+        username: values.username,
+        email: values.email,
+        date: values.date,
+      },
+    });
     return {
       success: true,
     };

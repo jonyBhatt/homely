@@ -33,8 +33,8 @@ export const propertySchema = z.object({
   price: z.string(),
   category: z.string(),
 
-  rooms: z.string() ,
-  bedrooms: z.string() ,
+  rooms: z.string(),
+  bedrooms: z.string(),
   bathrooms: z.string(),
   garage: z.string(),
   size: z.string(),
@@ -46,4 +46,10 @@ export const propertySchema = z.object({
   // zip: z.string().min(1, { message: "Zip is required" }),
   state: z.string().optional(),
   country: z.string().optional(),
+});
+
+export const scheduleSchema = z.object({
+  username: z.string(),
+  email: z.string().email(),
+  date: z.string(),
 });
