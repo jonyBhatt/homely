@@ -3,6 +3,7 @@ import { MdOutlineDashboard,MdOutlineAddToPhotos,MdOutlineRateReview } from "rea
 import { TiMessages } from "react-icons/ti";
 import { RiHome3Line } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
+import { TbBrandBooking } from "react-icons/tb";
 export const LandLordSideBarContents = [
   {
     title: "Dashboard",
@@ -10,9 +11,9 @@ export const LandLordSideBarContents = [
     icon: <MdOutlineDashboard />,
   },
   {
-    title: "Message",
+    title: "Bookings",
     path: "/l-dashboard/message",
-    icon: <TiMessages />,
+    icon: <TbBrandBooking />,
   },
   {
     title: "My Property",

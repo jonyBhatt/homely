@@ -6,8 +6,12 @@ const nextConfig = {
         protocol: "https",
         hostname: "res.cloudinary.com",
       },
+      {
+        hostname: "a0.muscache.com",
+        protocol: "https",
+      },
     ],
-    domains:["res.cloudinary.com"]
+    domains: ["res.cloudinary.com"],
   },
 };
 

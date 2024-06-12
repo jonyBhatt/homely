@@ -5,11 +5,11 @@
 "use server";
 
 import type { Property } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+import * as z from "zod";
 import prisma from "~/server/db";
 import { propertySchema } from "~/utils/validation";
-import * as z from "zod";
 import { getCurrentUser } from "../user";
-import { revalidatePath } from "next/cache";
 
 export const getProperties = async (): Promise<Property[] | { error: any }> => {
   try {
