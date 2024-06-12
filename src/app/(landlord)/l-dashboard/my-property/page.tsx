@@ -1,9 +1,19 @@
+import { redirect } from "next/navigation";
 import { PropertyCard } from "~/app/(landlord)/l-dashboard/my-property/_components/PropertyCard";
+import { auth } from "~/auth";
 // import { properties } from "~/utils/mock/property-data";
 import prisma from "~/server/db";
 
 async function MyProperty() {
-  const properties = await prisma.property.findMany();
+  const session = await auth();
+  if (!session?.user.id) {
+    redirect("/login");
+  }
+  const properties = await prisma.property.findMany({
+    where: {
+      userId: session.user.id,
+    },
+  });
   if (!properties || properties.length === 0) {
     return <p>No properties available</p>;
   }

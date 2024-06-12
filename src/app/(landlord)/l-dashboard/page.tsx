@@ -1,27 +1,30 @@
-import { FaCog, FaHome } from "react-icons/fa";
-import { FaChartBar, FaUser } from "react-icons/fa6";
-import { FaRegHeart } from "react-icons/fa";
-import { MdOutlineDashboard,MdOutlineAddToPhotos,MdOutlineRateReview } from "react-icons/md";
-import { TiMessages } from "react-icons/ti";
-import { RiHome3Line } from "react-icons/ri";
+import { redirect } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
+import { FaRegHeart } from "react-icons/fa";
+import { MdOutlineRateReview } from "react-icons/md";
+import { RiHome3Line } from "react-icons/ri";
+import { auth } from "~/auth";
 import DCard from "~/components/dashboard/d-card";
 
 export default async function LandlordDashboard() {
+  const session = await auth();
+  if (!session?.user) {
+    redirect("/login");
+  }
   const cards = [
     { icon: <RiHome3Line />, title: "All Properties", description: "583" },
     {
-      icon: <CgProfile/>,
+      icon: <CgProfile />,
       title: "Total Views",
       description: "192",
     },
     {
-      icon: <MdOutlineRateReview/>,
+      icon: <MdOutlineRateReview />,
       title: "Total Visitor Reviews",
       description: "438",
     },
     {
-      icon: <FaRegHeart/>,
+      icon: <FaRegHeart />,
       title: "Total Favorites",
       description: "67",
     },
@@ -29,7 +32,9 @@ export default async function LandlordDashboard() {
   return (
     <div className="container mx-auto py-16 ">
       <div className="flex flex-col gap-0.5">
-        <span className="text-2xl font-semibold">Howdy, John</span>
+        <span className="text-2xl font-semibold">
+          Howdy, {session.user.name}
+        </span>
         <p className="text-sm tracking-tight text-muted-foreground">
           We are glad to see you again!
         </p>
