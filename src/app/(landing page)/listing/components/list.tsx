@@ -1,14 +1,35 @@
+"use client";
 import { Property } from "@prisma/client";
 import { Bath, Bed, Heart, SquareArrowOutUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 import { Separator } from "~/components/ui/separator";
+import { wishList } from "~/server/action/property";
+import { Button } from "~/components/ui/button";
 
 interface ListProps {
   properties: Property[];
 }
 
 export const List = ({ properties }: ListProps) => {
+  const session = useSession();
+
+  if (!session.data?.user.id) return null;
+
+  const addWishList = async (propId: string, userId: string) => {
+    try {
+      toast.promise(wishList(propId, userId), {
+        success: () => toast.success("Property added to wishlist"),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+        error: (error) => toast.error(error.message),
+      });
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to add property to wishlist");
+    }
+  };
   return (
     <div className="my-16 flex w-full items-center justify-center">
       <div className="grid h-full w-full grid-cols-1  gap-4 pb-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -59,9 +80,17 @@ export const List = ({ properties }: ListProps) => {
                 <Link href={`/listing/${property.id}`}>
                   <SquareArrowOutUpRight className="h-5 w-5 text-muted-foreground" />
                 </Link>
-                <Link href="/">
-                  <Heart className="h-5 w-5 text-muted-foreground" />
-                </Link>
+                <Button
+                  onClick={() =>
+                    session.data &&
+                    session.data.user &&
+                    session.data.user.id &&
+                    addWishList(property.id, session.data.user.id)
+                  }
+                  className="group bg-transparent hover:bg-transparent"
+                >
+                  <Heart className="h-5 w-5 text-muted-foreground group-hover:text-pink-600" />
+                </Button>
               </div>
             </div>
           </div>

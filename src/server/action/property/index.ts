@@ -10,6 +10,7 @@ import * as z from "zod";
 import prisma from "~/server/db";
 import { propertySchema, scheduleSchema } from "~/utils/validation";
 import { getCurrentUser } from "../user";
+import { auth } from "~/auth";
 
 export const getProperties = async (): Promise<Property[] | { error: any }> => {
   try {
@@ -185,6 +186,46 @@ export const makeSchedule = async (
       success: true,
     };
   } catch (error) {
+    return null;
+  }
+};
+
+//Wish List
+export const wishList = async (propId: string, userId: string) => {
+  try {
+    await prisma.wishList.create({
+      data: {
+        propertyId: propId,
+        userId: userId,
+      },
+    });
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+// Get Wish List
+export const getWishList = async () => {
+  const session = await auth();
+  if (!session || !session.user) return null;
+  try {
+    const wishList = await prisma.wishList.findMany({
+      where: {
+        userId: session.user.id,
+      },
+      include: {
+        property: true,
+      },
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    return wishList;
+  } catch (error) {
+    console.log(error);
     return null;
   }
 };

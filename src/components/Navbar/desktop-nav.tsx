@@ -37,8 +37,6 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
     };
   });
 
-
-
   return (
     <div
       className={` flex w-full items-center justify-between ${isScroll ? " sticky top-0 h-full w-full rounded-md border-0 bg-gray-500 bg-opacity-10 bg-clip-padding px-4 py-2 text-white backdrop-blur-sm backdrop-filter " : "bg-transparent text-white"}  `}
@@ -104,7 +102,7 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Link href="/">My Wishlist</Link>
+                  <Link href="/wishlist">My Wishlist</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 {session.user.role === "Admin" && (

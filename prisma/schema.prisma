@@ -36,6 +36,7 @@ model User {
     createdAt     DateTime   @default(now())
     updatedAt     DateTime   @updatedAt
     property      Property[]
+    wishList      WishList[]
 
     @@map("users")
 }
@@ -107,6 +108,7 @@ model Property {
     userId   String?    @db.ObjectId
     user     User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
     schedule Schedule[]
+    wishList WishList[]
 
     @@map("property")
 }
@@ -123,4 +125,18 @@ model Schedule {
     createdAt DateTime @default(now())
 
     @@map("schedule")
+}
+
+model WishList {
+    id String @id @default(auto()) @map("_id") @db.ObjectId
+
+    propertyId String   @db.ObjectId
+    property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+    userId    String   @db.ObjectId
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("wishlist")
 }
