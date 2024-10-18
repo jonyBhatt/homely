@@ -1,142 +1,180 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// This is your Prisma schema file
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "mongodb"
-    url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 type Address {
-    street String
-    city   String
-    state  String
-    zip    String
+  street String
+  city   String
+  state  String
+  zip    String
 }
 
 enum UserRole {
-    Admin
-    Landlord
-    User
+  Admin
+  Landlord
+  Agent
+  User
 }
 
 model User {
-    id            String     @id @default(auto()) @map("_id") @db.ObjectId
-    name          String?
-    email         String?    @unique
-    emailVerified DateTime?
-    image         String?
-    password      String?
-    accounts      Account[]
-    sessions      Session[]
-    role          UserRole   @default(User)
-    createdAt     DateTime   @default(now())
-    updatedAt     DateTime   @updatedAt
-    property      Property[]
-    wishList      WishList[]
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  accounts      Account[]
+  sessions      Session[]
+  role          UserRole   @default(User)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  agency        Agency[]   @relation("LandlordAgencies") // Landlord can own multiple agencies
+  agent         Agent? // Agents have a one-to-one relation with User
+  wishList      WishList[]
 
-    @@map("users")
+  @@map("users")
 }
 
 model Account {
-    id                String  @id @default(auto()) @map("_id") @db.ObjectId
-    userId            String  @db.ObjectId
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.String
-    access_token      String? @db.String
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.String
-    session_state     String?
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
-    @@map("accounts")
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
 }
 
 model Session {
-    id           String   @id @default(auto()) @map("_id") @db.ObjectId
-    sessionToken String   @unique
-    userId       String   @db.ObjectId
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    @@map("sessions")
+  @@map("sessions")
 }
 
 model VerificationToken {
-    id         String   @id @default(auto()) @map("_id") @db.ObjectId
-    identifier String
-    token      String
-    expires    DateTime
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  token      String
+  expires    DateTime
 
-    @@unique([identifier, token])
-    @@map("verification_token")
+  @@unique([identifier, token])
+  @@map("verification_token")
 }
 
+// Agent Model: Agents are hired by agencies and can list properties
+model Agent {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String     @unique @db.ObjectId
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  agencyId   String     @db.ObjectId
+  agency     Agency     @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  properties Property[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("agent")
+}
+
+// Agency Model: Created by landlords, agencies can hire agents
+model Agency {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  address    String
+  phone      String
+  landlordId String     @db.ObjectId // Link to the landlord who owns the agency
+  landlord   User       @relation(fields: [landlordId], references: [id], onDelete: Cascade, name: "LandlordAgencies")
+  agents     Agent[]
+  properties Property[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("agency")
+}
+
+// Property Model: Agents can list properties
 model Property {
-    id String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  price       String
+  category    String
+  rooms       String
+  bedrooms    String
+  bathrooms   String
+  garage      String
+  size        String
+  address     String
+  city        String
+  image       String? // Optional field
+  state       String? // Optional field
+  country     String? // Optional field
+  agentId     String? @db.ObjectId
+  agent       Agent?  @relation(fields: [agentId], references: [id], onDelete: Cascade)
+  agencyId    String? @db.ObjectId
+  agency      Agency? @relation(fields: [agencyId], references: [id], onDelete: Cascade)
 
-    title       String
-    description String
-    price       String
-    category    String
-    rooms       String
-    bedrooms    String
-    bathrooms   String
-    garage      String
-    size        String
-    address     String
-    city        String
-    image       String? // Optional field
-    state       String? // Optional field
-    country     String? // Optional field
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  schedule  Schedule[]
+  wishList  WishList[]
 
-    userId   String?    @db.ObjectId
-    user     User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
-    schedule Schedule[]
-    wishList WishList[]
-
-    @@map("property")
+  @@map("property")
 }
 
 model Schedule {
-    id         String   @id @default(auto()) @map("_id") @db.ObjectId
-    propertyId String   @db.ObjectId
-    property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  propertyId String   @db.ObjectId
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
-    username String
-    email    String
-    date     String
+  username String
+  email    String
+  date     String
 
-    createdAt DateTime @default(now())
+  createdAt DateTime @default(now())
 
-    @@map("schedule")
+  @@map("schedule")
 }
 
 model WishList {
-    id String @id @default(auto()) @map("_id") @db.ObjectId
+  id String @id @default(auto()) @map("_id") @db.ObjectId
 
-    propertyId String   @db.ObjectId
-    property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  propertyId String   @db.ObjectId
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
-    userId    String   @db.ObjectId
-    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-    @@map("wishlist")
+  @@map("wishlist")
 }
