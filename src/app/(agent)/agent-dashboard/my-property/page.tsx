@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
-import { PropertyCard } from "~/app/(landlord)/l-dashboard/my-property/_components/PropertyCard";
+// import { PropertyCard } from "~/app/(landlord)/l-dashboard/my-property/_components/PropertyCard";
 import { auth } from "~/auth";
 // import { properties } from "~/utils/mock/property-data";
 import prisma from "~/server/db";
+import { PropertyCard } from "./_components/PropertyCard";
 
 async function MyProperty() {
   const session = await auth();
