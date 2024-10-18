@@ -1,5 +1,5 @@
 "use client";
-import { LandLordSideBarContents } from "~/constants/sidebar-navigation";
+import { AgentSideBarContents } from "~/constants/sidebar-navigation";
 import { signOut } from "next-auth/react";
 import { Button } from "../ui/button";
 import { CiLogout } from "react-icons/ci";
@@ -25,7 +25,7 @@ export const SideBar = ({ role, className }: SideBarProps) => {
       )}
     >
       {role === "Landlord" &&
-        LandLordSideBarContents.map((ctx) => (
+        AgentSideBarContents.map((ctx) => (
           <Link
             href={ctx.path}
             key={ctx.title}

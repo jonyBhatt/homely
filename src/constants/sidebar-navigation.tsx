@@ -1,43 +1,47 @@
 import { FaRegHeart } from "react-icons/fa";
-import { MdOutlineDashboard,MdOutlineAddToPhotos,MdOutlineRateReview } from "react-icons/md";
+import {
+  MdOutlineDashboard,
+  MdOutlineAddToPhotos,
+  MdOutlineRateReview,
+} from "react-icons/md";
 import { TiMessages } from "react-icons/ti";
 import { RiHome3Line } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
 import { TbBrandBooking } from "react-icons/tb";
-export const LandLordSideBarContents = [
+export const AgentSideBarContents = [
   {
     title: "Dashboard",
-    path: "/l-dashboard",
+    path: "/agent-dashboard",
     icon: <MdOutlineDashboard />,
   },
   {
     title: "Bookings",
-    path: "/l-dashboard/message",
+    path: "/agent-dashboard/message",
     icon: <TbBrandBooking />,
   },
   {
     title: "My Property",
-    path: "/l-dashboard/my-property",
+    path: "/agent-dashboard/my-property",
     icon: <RiHome3Line />,
   },
   {
     title: "Add Property",
-    path: "/l-dashboard/add-property",
+    path: "/agent-dashboard/add-property",
     icon: <MdOutlineAddToPhotos />,
   },
   {
     title: "My Favorites",
-    path: "/l-dashboard/my-fav",
+    path: "/agent-dashboard/my-fav",
     icon: <FaRegHeart />,
   },
   {
     title: "Profile",
-    path: "/l-dashboard/profile",
+    path: "/agent-dashboard/profile",
     icon: <CgProfile />,
   },
   {
     title: "Review",
-    path: "/l-dashboard/review",
+    path: "/agent-dashboard/review",
     icon: <MdOutlineRateReview />,
   },
 ];

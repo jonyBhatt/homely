@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "~/auth";
 import { SideBar } from "~/components/dashboard/sidebar";
-const LandLordSideBar = async () => {
+const AgentSidebar = async () => {
   const session = await auth();
   if (!session) return null;
   return (
@@ -15,4 +15,4 @@ const LandLordSideBar = async () => {
   );
 };
 
-export default LandLordSideBar;
+export default AgentSidebar;
