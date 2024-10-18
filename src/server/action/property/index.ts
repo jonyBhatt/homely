@@ -155,6 +155,9 @@ export const getPropById = async (id: string) => {
       where: {
         id,
       },
+      include: {
+        user: true,
+      },
     });
     return { property };
   } catch (error) {

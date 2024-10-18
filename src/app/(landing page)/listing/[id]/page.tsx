@@ -6,9 +6,13 @@ import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { getPropById } from "~/server/action/property";
 import { ScheduleForm } from "./components/schedule-form";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import Link from "next/link";
 
 async function SingleProperty({ params }: { params: { id: string } }) {
   const property = await getPropById(params.id);
+  // console.log(property);
+
   return (
     <div className="py-16">
       <div className="container mx-auto mt-16 p-4">
@@ -128,7 +132,7 @@ async function SingleProperty({ params }: { params: { id: string } }) {
           </div>
 
           {/* Right Section */}
-          <div className="mt-6 lg:mt-0 lg:w-1/3">
+          <div className="mt-6 flex flex-col gap-16 lg:mt-0 lg:w-1/3">
             <div className="rounded-lg bg-white p-4 shadow">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-xl font-semibold">Price</h2>
@@ -139,6 +143,35 @@ async function SingleProperty({ params }: { params: { id: string } }) {
               <div>
                 <h2 className="mb-4 text-xl font-semibold">Schedule a Tour</h2>
                 <ScheduleForm id={property?.property?.id} />
+              </div>
+            </div>
+            <div className="my-4 w-full">
+              <div className="flex flex-col items-center justify-center rounded-lg bg-secondary p-4 shadow-md">
+                <h2 className="text-lg font-semibold">Landlord Details</h2>
+                <div className="my-4 flex flex-col items-center justify-center gap-4">
+                  <Avatar>
+                    <AvatarImage src={property?.property?.user?.image ?? ""} />
+                    <AvatarFallback>
+                      {property?.property?.user?.name?.slice(0, 1)}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col items-center justify-center">
+                    <h2 className="text-xl font-semibold">
+                      {property?.property?.user?.name}
+                    </h2>
+                    <span className="text-center text-base text-muted-foreground">
+                      Role
+                    </span>
+                  </div>
+                  <Link href={`/profile/${property?.property?.user?.id}`}>
+                    <Button
+                      size={"lg"}
+                      className="w-full rounded font-semibold"
+                    >
+                      View Profile
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>

@@ -33,7 +33,7 @@ export const ScheduleForm = ({ id }: { id: string | undefined }) => {
       const res = await makeSchedule(id!, values);
       if (res?.success) {
         toast.success("Schedule booked");
-        form.reset();
+      form.reset();
       }
     } catch (error) {
       console.log(error);
