@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { SizeIcon } from "@radix-ui/react-icons";
 import { Bath, Bed, Calendar, Home } from "lucide-react";
 import Image from "next/image";
@@ -150,20 +153,24 @@ async function SingleProperty({ params }: { params: { id: string } }) {
                 <h2 className="text-lg font-semibold">Landlord Details</h2>
                 <div className="my-4 flex flex-col items-center justify-center gap-4">
                   <Avatar>
-                    <AvatarImage src={property?.property?.user?.image ?? ""} />
+                    <AvatarImage
+                      src={property?.property?.agent?.user.image ?? ""}
+                    />
                     <AvatarFallback>
-                      {property?.property?.user?.name?.slice(0, 1)}
+                      {property?.property?.agent?.user.name?.slice(0, 1)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col items-center justify-center">
                     <h2 className="text-xl font-semibold">
-                      {property?.property?.user?.name}
+                      {property?.property?.agent?.user.name}
                     </h2>
                     <span className="text-center text-base text-muted-foreground">
                       Role
                     </span>
                   </div>
-                  <Link href={`/profile/${property?.property?.user?.id}`}>
+                  <Link
+                    href={`/profile/${property?.property?.agent?.user?.id}`}
+                  >
                     <Button
                       size={"lg"}
                       className="w-full rounded font-semibold"
