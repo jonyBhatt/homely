@@ -7,7 +7,7 @@ import Link from "next/link";
 import { cn } from "~/lib/utils";
 import { usePathname } from "next/navigation";
 interface SideBarProps {
-  role: "Admin" | "Landlord" | "User";
+  role: "Admin" | "Landlord" | "User" | "Agent";
   className?: string;
 }
 
@@ -20,7 +20,7 @@ export const SideBar = ({ role, className }: SideBarProps) => {
   return (
     <aside
       className={cn(
-        ` flex h-full w-full flex-col  gap-4 bg-[#405189] items-center  py-4 text-white  sm:pt-4`,
+        ` flex h-full w-full flex-col  items-center gap-4 bg-[#405189]  py-4 text-white  sm:pt-4`,
         className,
       )}
     >
@@ -29,7 +29,7 @@ export const SideBar = ({ role, className }: SideBarProps) => {
           <Link
             href={ctx.path}
             key={ctx.title}
-            className={`group mb-6 flex w-full items-start rounded-lg px-4 py-4 transition-colors duration-100 ease-in-out hover:bg-muted ${ctx.path === pathname ?"bg-primary text-white":""}`}
+            className={`group mb-6 flex w-full items-start rounded-lg px-4 py-4 transition-colors duration-100 ease-in-out hover:bg-muted ${ctx.path === pathname ? "bg-primary text-white" : ""}`}
           >
             <span className="text-2xl group-hover:text-primary">
               {ctx.icon}
