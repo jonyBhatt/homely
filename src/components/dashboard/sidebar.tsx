@@ -1,5 +1,8 @@
 "use client";
-import { AgentSideBarContents } from "~/constants/sidebar-navigation";
+import {
+  AgentSideBarContents,
+  LandlordSideBarContents,
+} from "~/constants/sidebar-navigation";
 import { signOut } from "next-auth/react";
 import { Button } from "../ui/button";
 import { CiLogout } from "react-icons/ci";
@@ -24,8 +27,26 @@ export const SideBar = ({ role, className }: SideBarProps) => {
         className,
       )}
     >
-      {role === "Landlord" &&
+      {/** Agent  */}
+      {role === "Agent" &&
         AgentSideBarContents.map((ctx) => (
+          <Link
+            href={ctx.path}
+            key={ctx.title}
+            className={`group mb-6 flex w-full items-start rounded-lg px-4 py-4 transition-colors duration-100 ease-in-out hover:bg-muted ${ctx.path === pathname ? "bg-primary text-white" : ""}`}
+          >
+            <span className="text-2xl group-hover:text-primary">
+              {ctx.icon}
+            </span>
+            <span className="ml-3 hidden group-hover:text-primary lg:inline-block">
+              {ctx.title}
+            </span>
+          </Link>
+        ))}
+
+      {/** Landlord */}
+      {role === "Landlord" &&
+        LandlordSideBarContents.map((ctx) => (
           <Link
             href={ctx.path}
             key={ctx.title}
