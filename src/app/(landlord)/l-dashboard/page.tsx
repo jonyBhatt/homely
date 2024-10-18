@@ -6,7 +6,7 @@ import { RiHome3Line } from "react-icons/ri";
 import { auth } from "~/auth";
 import DCard from "~/components/dashboard/d-card";
 
-export default async function LandlordDashboard() {
+export default async function AgentDashboard() {
   const session = await auth();
   if (!session?.user) {
     redirect("/login");
