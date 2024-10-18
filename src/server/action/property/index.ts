@@ -73,7 +73,7 @@ export const addProperty = async (values: z.infer<typeof propertySchema>) => {
         country,
         image,
         state,
-        userId: user.id,
+        agentId: user.id,
       },
     });
     return {
@@ -156,7 +156,11 @@ export const getPropById = async (id: string) => {
         id,
       },
       include: {
-        user: true,
+        agent: {
+          select: {
+            user: true,
+          },
+        },
       },
     });
     return { property };
