@@ -11,7 +11,7 @@ async function MyProperty() {
   }
   const properties = await prisma.property.findMany({
     where: {
-      userId: session.user.id,
+      agentId: session.user.id,
     },
   });
   if (!properties || properties.length === 0) {

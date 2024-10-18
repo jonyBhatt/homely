@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaHome, FaUser, FaCog } from "react-icons/fa";
 import { auth } from "~/auth";
 import { SideBar } from "~/components/dashboard/sidebar";
 const LandLordSideBar = async () => {
