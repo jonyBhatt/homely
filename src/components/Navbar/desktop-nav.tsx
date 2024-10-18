@@ -112,7 +112,12 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
                 )}
                 {session.user.role === "Landlord" && (
                   <DropdownMenuItem>
-                    <Link href="/l-dashboard">My Dashboard</Link>
+                    <Link href="/landlord-dashboard">My Dashboard</Link>
+                  </DropdownMenuItem>
+                )}
+                {session.user.role === "Agent" && (
+                  <DropdownMenuItem>
+                    <Link href="/agent-dashboard">My Dashboard</Link>
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuItem>
