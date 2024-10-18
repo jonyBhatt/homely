@@ -66,10 +66,10 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
           Listing
         </Link>
         <Link
-          href={"/property"}
+          href={"/agency"}
           className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
         >
-          Property
+          Agency
         </Link>
         <Link
           href={"/"}
