@@ -3,6 +3,7 @@ import {
   MdOutlineDashboard,
   MdOutlineAddToPhotos,
   MdOutlineRateReview,
+  MdOutlineHomeWork,
 } from "react-icons/md";
 import { TiMessages } from "react-icons/ti";
 import { RiHome3Line } from "react-icons/ri";
@@ -50,37 +51,42 @@ export const AgentSideBarContents = [
 export const LandlordSideBarContents = [
   {
     title: "Dashboard",
-    path: "/agent-dashboard",
+    path: "/landlord-dashboard",
     icon: <MdOutlineDashboard />,
   },
   {
     title: "Bookings",
-    path: "/agent-dashboard/message",
+    path: "/landlord-dashboard/message",
     icon: <TbBrandBooking />,
   },
   {
     title: "My Property",
-    path: "/agent-dashboard/my-property",
+    path: "/landlord-dashboard/my-property",
     icon: <RiHome3Line />,
   },
   {
-    title: "Add Property",
-    path: "/agent-dashboard/add-property",
-    icon: <MdOutlineAddToPhotos />,
+    title: "My Agency",
+    path: "/landlord-dashboard/agency",
+    icon: <MdOutlineHomeWork />,
   },
-  {
-    title: "My Favorites",
-    path: "/agent-dashboard/my-fav",
-    icon: <FaRegHeart />,
-  },
+  // {
+  //   title: "Add Property",
+  //   path: "/landlord-dashboard/add-property",
+  //   icon: <MdOutlineAddToPhotos />,
+  // },
+  // {
+  //   title: "My Favorites",
+  //   path: "/landlord-dashboard/my-fav",
+  //   icon: <FaRegHeart />,
+  // },
   {
     title: "Profile",
-    path: "/agent-dashboard/profile",
+    path: "/landlord-dashboard/profile",
     icon: <CgProfile />,
   },
   {
     title: "Review",
-    path: "/agent-dashboard/review",
+    path: "/landlord-dashboard/review",
     icon: <MdOutlineRateReview />,
   },
 ];
