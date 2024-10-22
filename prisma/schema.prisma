@@ -110,6 +110,7 @@ model Agency {
   name       String
   address    String
   phone      String
+  email      String
   image      String?
   landlordId String     @db.ObjectId // Link to the landlord who owns the agency
   landlord   User       @relation(fields: [landlordId], references: [id], onDelete: Cascade, name: "LandlordAgencies")
