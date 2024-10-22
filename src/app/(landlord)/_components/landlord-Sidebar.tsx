@@ -7,8 +7,8 @@ export const LandlordSidebar = async () => {
   const session = await auth();
   if (!session) return null;
   return (
-    <div className="flex flex-col items-start bg-[#405189] px-0 md:px-4 ">
-      <Link href="/" className="mt-4">
+    <div className="flex min-h-dvh flex-col items-start bg-[#405189] px-0 md:px-4 ">
+      <Link href="/" className="my-4">
         <Image src="/logo.svg" alt="logo" width={80} height={80} />
       </Link>
       <SideBar role={session?.user.role} />
