@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -14,19 +15,31 @@ import {
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import UploadButton from "~/lib/UploadButton";
+import { createAgency } from "~/server/action/agency";
 
 import { agencySchema } from "~/utils/validation";
+import { toast } from "sonner";
 export const CreateAgencyForm = () => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof agencySchema>>({
     resolver: zodResolver(agencySchema),
     defaultValues: {
       agencyname: "",
+      address: "",
+      email: "",
+      phone: "",
+      image: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof agencySchema>) {
+  async function onSubmit(values: z.infer<typeof agencySchema>) {
     console.log(values);
+    toast.promise(createAgency(values), {
+      loading: "Creating agency...",
+      success: "Agency created successfully!",
+      error: "Agency creation failed!",
+    });
   }
   return (
     <div>
