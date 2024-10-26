@@ -76,11 +76,8 @@ export const agencySchema = z.object({
     ),
 
   image: z.string().optional(),
-  phone: z
-    .string()
-    .regex(/^(\+8801(7|6)\d{8})$/, {
-      message:
-        "Phone number must start with +880 and contain 11 digits with 017 or 016 after +880",
-    })
-    .max(11),
+  phone: z.string().regex(/^(\+8801(7|6)\d{8})$/, {
+    message:
+      "Phone number must start with +880 and contain 11 digits with 017 or 016 after +880",
+  }),
 });

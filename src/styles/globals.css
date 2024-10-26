@@ -111,3 +111,21 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
+.agency-bg {
+  background-image: url("/images/agency.jpg"),
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background-blend-mode: overlay;
+  /* background-position: fixed; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  max-height: 100dvh;
+  height: 200px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

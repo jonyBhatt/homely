@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Button } from "~/components/ui/button";
 import { CurrentUser } from "~/lib/current-user";
 import prisma from "~/server/db";
+import { AgencyPage } from "../_components/AgencyPage";
 async function Agency() {
   const { user } = await CurrentUser();
   const existAgency = await prisma.agency.findFirst({
@@ -12,7 +13,9 @@ async function Agency() {
   return (
     <div>
       {existAgency ? (
-        <></>
+        <div className="relative">
+          <AgencyPage />
+        </div>
       ) : (
         <div>
           <h2 className="border-b border-b-[#405189] pb-2  text-3xl font-semibold">
