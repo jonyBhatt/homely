@@ -1,4 +1,5 @@
 "use server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { CurrentUser } from "~/lib/current-user";
 import prisma from "~/server/db";
@@ -36,5 +37,26 @@ export const createAgency = async (values: z.infer<typeof agencySchema>) => {
     return {
       error: error,
     };
+  }
+};
+
+export const DeleteAgency = async (id: string) => {
+  try {
+    await prisma.agency.delete({
+      where: {
+        id,
+      },
+    });
+
+    revalidatePath("landlord-dashboard/agency");
+    return {
+      success: true,
+    };
+  } catch (error) {
+    console.log(error)
+    return {
+      error: error,
+      success:false
+    }
   }
 };
