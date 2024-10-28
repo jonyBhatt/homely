@@ -14,7 +14,7 @@ async function Agency() {
     <div>
       {existAgency ? (
         <div className="relative">
-          <AgencyPage />
+          <AgencyPage agency={existAgency} />
         </div>
       ) : (
         <div>
