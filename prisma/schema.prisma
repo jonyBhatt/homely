@@ -24,21 +24,28 @@ enum UserRole {
   User
 }
 
+enum AppStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
 model User {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String?    @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  accounts      Account[]
-  sessions      Session[]
-  role          UserRole   @default(User)
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
-  agency        Agency[]   @relation("LandlordAgencies") // Landlord can own multiple agencies
-  agent         Agent? // Agents have a one-to-one relation with User
-  wishList      WishList[]
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
+  name             String?
+  email            String?           @unique
+  emailVerified    DateTime?
+  image            String?
+  password         String?
+  accounts         Account[]
+  sessions         Session[]
+  role             UserRole          @default(User)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  agency           Agency[]          @relation("LandlordAgencies") // Landlord can own multiple agencies
+  agent            Agent? // Agents have a one-to-one relation with User
+  wishList         WishList[]
+  agentApplication AgentApplication?
 
   @@map("users")
 }
@@ -89,13 +96,28 @@ model VerificationToken {
   @@map("verification_token")
 }
 
+model AgentApplication {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  userId      String    @unique @db.ObjectId
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cv          String // Agent's CV
+  status      AppStatus @default(PENDING) // Application status: PENDING, APPROVED, REJECTED
+  published   Boolean   @default(false) // True if the admin has approved the application
+  appliedAt   DateTime  @default(now())
+  reviewedAt  DateTime?
+
+  @@map("agent_application")
+}
+
 // Agent Model: Agents are hired by agencies and can list properties
 model Agent {
   id         String     @id @default(auto()) @map("_id") @db.ObjectId
   userId     String     @unique @db.ObjectId
   user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  agencyId   String     @db.ObjectId
-  agency     Agency     @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  agencyId   String?    @db.ObjectId // Nullable until hired
+  agency     Agency?    @relation(fields: [agencyId], references: [id], onDelete: Cascade)
   properties Property[]
 
   createdAt DateTime @default(now())
