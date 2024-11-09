@@ -7,6 +7,16 @@ import { Separator } from "~/components/ui/separator";
 import prisma from "~/server/db";
 import { agents, properties } from "~/utils/mock/agency";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import { AgentForm } from "../_components/AgentForm";
+
 type Property = {
   title: string;
   description: string;
@@ -103,14 +113,27 @@ export default async function SingleAgency({
               ))}
             </div>
           </ScrollArea>
-          <Link
-            href="/"
-            className={buttonVariants({
-              className: "mt-3 text-lg",
-            })}
-          >
-            Apply for agent
-          </Link>
+          <Dialog>
+            <DialogTrigger
+              className={buttonVariants({
+                size: "lg",
+              })}
+            >
+              Apply for agent
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="container mx-auto">
+                <DialogTitle className="border-b border-b-gray-400 pb-1.5 text-left">
+                  Apply for become an agent
+                </DialogTitle>
+              </DialogHeader>
+              <div className=" mt-2">
+                <ScrollArea className="container h-[350px] w-[500px]">
+                  <AgentForm id={agency.id} />
+                </ScrollArea>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       {/** Property */}
