@@ -81,3 +81,9 @@ export const agencySchema = z.object({
       "Phone number must start with +880 and contain 11 digits with 017 or 016 after +880",
   }),
 });
+
+export const agentFormSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  cv: z.string(),
+});

@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 import { Button } from "~/components/ui/button";
@@ -16,19 +17,15 @@ import {
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { UploadFileDropeZone } from "~/lib/UploadFileDropeZone";
-
-const formSchema = z.object({
-  title: z.string(),
-  description: z.string(),
-  cv: z.string(),
-});
+import { agentForm } from "~/server/action/agent";
+import { agentFormSchema } from "~/utils/validation";
 
 interface AgentFormProps {
   id: string;
 }
 export const AgentForm = ({ id }: AgentFormProps) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof agentFormSchema>>({
+    resolver: zodResolver(agentFormSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -36,8 +33,16 @@ export const AgentForm = ({ id }: AgentFormProps) => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  function onSubmit(values: z.infer<typeof agentFormSchema>) {
     console.log(values);
+
+    toast.promise(agentForm(values), {
+      loading: "Loading...",
+      success: () => {
+        return `Application has been submitted!`;
+      },
+      error: "Something went wrong!",
+    });
   }
   return (
     <div className="">
@@ -50,7 +55,7 @@ export const AgentForm = ({ id }: AgentFormProps) => {
               <FormItem>
                 <FormLabel>Title</FormLabel>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input placeholder="title" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

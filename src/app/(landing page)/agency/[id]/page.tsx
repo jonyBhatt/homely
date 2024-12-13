@@ -48,7 +48,7 @@ export default async function SingleAgency({
   const { id } = params;
   const agency = await prisma.agency.findUnique({
     where: { id },
-    include: { landlord: { select: { name: true, image: true } } },
+    include: { landlord: { select: { name: true, image: true, id: true } } },
   });
 
   if (!agency) {
@@ -73,7 +73,10 @@ export default async function SingleAgency({
               <a href={`mailto:${agency.email}`} className="text-blue-500">
                 {agency.email}
               </a>
-              <div className="flex items-center space-x-2 ">
+              <Link
+                href={`/agency/owner/${agency.landlord.id}`}
+                className="flex items-center space-x-2 "
+              >
                 <Avatar>
                   <AvatarImage src={agency.landlord.image ?? ""} />
                   <AvatarFallback>
@@ -85,7 +88,7 @@ export default async function SingleAgency({
                 <p className="text-sm font-medium text-gray-700">
                   {agency.landlord.name ? agency.landlord.name : ""}
                 </p>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

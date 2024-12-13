@@ -46,6 +46,8 @@ model User {
   agent            Agent? // Agents have a one-to-one relation with User
   wishList         WishList[]
   agentApplication AgentApplication?
+  Review           Review[]
+  landlordReviews  Review[]          @relation("LandlordReviews")
 
   @@map("users")
 }
@@ -173,6 +175,7 @@ model Property {
   updatedAt DateTime   @updatedAt
   schedule  Schedule[]
   wishList  WishList[]
+  Review    Review[]
 
   @@map("property")
 }
@@ -203,4 +206,23 @@ model WishList {
   updatedAt DateTime @updatedAt
 
   @@map("wishlist")
+}
+
+model Review {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId // Reference to the user who created the review
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  landlordId String? @db.ObjectId // Optional: Review for a landlord
+  landlord   User?   @relation(fields: [landlordId], references: [id], onDelete: Cascade, name: "LandlordReviews")
+
+  propertyId String?   @db.ObjectId // Optional: Review for a property
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  rating    Int // Rating from 1 to 5
+  comment   String? // Optional review comment
+  createdAt DateTime @default(now()) // Timestamp when the review was created
+  updatedAt DateTime @updatedAt // Timestamp for when the review was last updated
+
+  @@map("reviews")
 }
