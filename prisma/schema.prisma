@@ -145,6 +145,7 @@ model Agency {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Review    Review[]
 
   @@map("agency")
 }
@@ -216,13 +217,15 @@ model Review {
   landlordId String? @db.ObjectId // Optional: Review for a landlord
   landlord   User?   @relation(fields: [landlordId], references: [id], onDelete: Cascade, name: "LandlordReviews")
 
-  propertyId String?   @db.ObjectId // Optional: Review for a property
-  property   Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  agencyId String? @db.ObjectId // Optional: Review for a property
+  agency   Agency? @relation(fields: [agencyId], references: [id], onDelete: Cascade)
 
-  rating    Int // Rating from 1 to 5
-  comment   String? // Optional review comment
-  createdAt DateTime @default(now()) // Timestamp when the review was created
-  updatedAt DateTime @updatedAt // Timestamp for when the review was last updated
+  rating     Int // Rating from 1 to 5
+  comment    String? // Optional review comment
+  createdAt  DateTime  @default(now()) // Timestamp when the review was created
+  updatedAt  DateTime  @updatedAt // Timestamp for when the review was last updated
+  Property   Property? @relation(fields: [propertyId], references: [id])
+  propertyId String?   @db.ObjectId
 
   @@map("reviews")
 }

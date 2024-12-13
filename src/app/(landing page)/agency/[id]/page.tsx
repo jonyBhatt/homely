@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
@@ -7,10 +10,10 @@ import { Separator } from "~/components/ui/separator";
 import prisma from "~/server/db";
 import { agents, properties } from "~/utils/mock/agency";
 
+import ReviewComponent from "~/components/Review";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -48,7 +51,14 @@ export default async function SingleAgency({
   const { id } = params;
   const agency = await prisma.agency.findUnique({
     where: { id },
-    include: { landlord: { select: { name: true, image: true, id: true } } },
+    include: {
+      landlord: { select: { name: true, image: true, id: true } },
+      Review: {
+        include: {
+          user: true,
+        },
+      },
+    },
   });
 
   if (!agency) {
@@ -138,6 +148,10 @@ export default async function SingleAgency({
             </DialogContent>
           </Dialog>
         </div>
+      </div>
+      {/** Review */}
+      <div className="my-8">
+        <ReviewComponent reviews={agency.Review} agencyId={params.id} />
       </div>
       {/** Property */}
       <div className="mt-16">

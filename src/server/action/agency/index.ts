@@ -53,10 +53,49 @@ export const DeleteAgency = async (id: string) => {
       success: true,
     };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return {
       error: error,
-      success:false
-    }
+      success: false,
+    };
+  }
+};
+
+export const ReviewAgency = async (
+  rating: number,
+  comment: string,
+  id: string,
+) => {
+  const { user } = await CurrentUser();
+  if (!user) return null;
+
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    await prisma.review.create({
+      data: {
+        rating: Number(rating),
+        comment: comment,
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+        agency: {
+          connect: {
+            id,
+          },
+        },
+      },
+    });
+
+    return {
+      success: true,
+      message: "Thanks for reviewed agency",
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      error: error,
+    };
   }
 };
