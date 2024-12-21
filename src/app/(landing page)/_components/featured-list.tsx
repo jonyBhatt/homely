@@ -10,7 +10,7 @@ export const FeaturedList = () => {
   return (
     <div className="my-16 bg-muted">
       <div className="container mx-auto py-24">
-        <div className="flex flex-col  justify-between gap-8 md:flex-row items-center md:gap-0">
+        <div className="flex flex-col  items-center justify-between gap-8 md:flex-row md:gap-0">
           <div className="flex flex-col items-center gap-2 md:items-start">
             <h2 className="text-center text-3xl font-semibold tracking-tight md:text-left">
               Discover Our Featured Listings
@@ -45,7 +45,7 @@ export const FeaturedList = () => {
                 </div>
                 <div className="absolute bottom-4 left-0 ml-4 flex items-center gap-2.5 rounded bg-primary px-4 py-2 text-white">
                   <span>
-                    <b>${data.price} /</b> month
+                    <b>&#2547;{data.price} /</b> month
                   </span>
                 </div>
               </div>
