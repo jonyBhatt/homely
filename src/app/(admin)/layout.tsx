@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { auth } from "~/auth";
-import { AdminHeader } from "./_components/AdminHeader";
+import { AdminSidebar } from "./_components/AdminSidebar";
 
 export default async function AdminLayout({
   children,
@@ -10,11 +10,9 @@ export default async function AdminLayout({
   const session = await auth();
   if (!session) return null;
   return (
-    <div className=" mx-auto flex min-h-dvh flex-col ">
-      {/** Header */}
-      <AdminHeader session={session} />
-      {/** Mobile First */}
-      <div className="flex lg:hidden"></div>
+    <div className=" mx-auto flex min-h-dvh gap-4 ">
+      <AdminSidebar />
+      <main className="flex-1 py-6">{children}</main>
     </div>
   );
 }
