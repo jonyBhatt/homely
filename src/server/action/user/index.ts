@@ -33,7 +33,7 @@ export const getUserByEmail = async (email: string) => {
 };
 
 /**
- * Get User by email
+ * Get User by id
  */
 export const getUserById = async (id: string) => {
   if (!id) return { error: "User does not exists! " };
@@ -43,8 +43,31 @@ export const getUserById = async (id: string) => {
         id,
       },
     });
-    return {user};
+    return { user };
   } catch (error) {
+    return null;
+  }
+};
+
+/**
+ * Get all users
+ */
+export const getUsers = async () => {
+  try {
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
+    });
+    return {
+      message: "Fetching users successfully",
+      users,
+    };
+  } catch (error) {
+    console.log(error);
     return null;
   }
 };
