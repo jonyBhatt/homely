@@ -1,31 +1,21 @@
 "use client";
 
-import { UserRole } from "@prisma/client";
+import { AppStatus, UserRole } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { FaEye, FaTrash, FaUserEdit } from "react-icons/fa";
 import { toast } from "sonner";
+import { getAgentApplications } from "~/server/action/agent";
 import { getUsers } from "~/server/action/user";
 
-const mockApplications = [
-  {
-    id: 1,
-    agentName: "Alice Johnson",
-    status: "Pending",
-    email: "alice@example.com",
-  },
-  {
-    id: 2,
-    agentName: "Bob Williams",
-    status: "Approved",
-    email: "bob@example.com",
-  },
-  {
-    id: 3,
-    agentName: "Charlie Adams",
-    status: "Rejected",
-    email: "charlie@example.com",
-  },
-];
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog";
+import { ApplicationView } from "../_components/ApplicationView";
 
 interface IUsers {
   id: string;
@@ -34,9 +24,19 @@ interface IUsers {
   role: UserRole;
 }
 
+interface IApplications {
+  id: string;
+  status: AppStatus;
+  user: {
+    id: string;
+    name: string | null;
+    email: string | null;
+  };
+}
+
 export default function Admin() {
   const [users, setUsers] = useState<IUsers[]>([]);
-  const [applications, setApplications] = useState(mockApplications);
+  const [applications, setApplications] = useState<IApplications[]>([]);
   const [userSearch, setUserSearch] = useState("");
   const [applicationSearch, setApplicationSearch] = useState("");
 
@@ -51,15 +51,27 @@ export default function Admin() {
     });
   }, []);
 
+  useEffect(() => {
+    toast.promise(getAgentApplications, {
+      loading: "Loading...",
+      success: (data) => {
+        console.log(data);
+        setApplications(data?.application ?? []);
+        return `${data?.message}`;
+      },
+      error: "Error",
+    });
+  }, []);
+
   const handleDeleteUser = (id: string) => {
     setUsers(users.filter((user) => user.id !== id));
   };
 
-  const handleViewApplication = (id: number) => {
+  const handleViewApplication = (id: string) => {
     const application = applications.find((app) => app.id === id);
     if (application) {
       alert(
-        `Agent Name: ${application.agentName}\nStatus: ${application.status}\nEmail: ${application.email}`,
+        `Agent Name: ${application.user.name}\nStatus: ${application.status}\nEmail: ${application.user.name}`,
       );
     }
   };
@@ -71,10 +83,12 @@ export default function Admin() {
 
   const filteredApplications = applications.filter(
     (application) =>
-      application.agentName
-        .toLowerCase()
+      application.user
+        .name!.toLowerCase()
         .includes(applicationSearch.toLowerCase()) ||
-      application.email.toLowerCase().includes(applicationSearch.toLowerCase()),
+      application.user
+        .email!.toLowerCase()
+        .includes(applicationSearch.toLowerCase()),
   );
   return (
     <>
@@ -116,7 +130,7 @@ export default function Admin() {
                 key={user.id}
                 className="flex w-full items-center justify-between hover:bg-gray-50"
               >
-                <td className="w-[5%] border border-gray-200 p-2 text-center text-xs">
+                <td className="w-[5%] border border-gray-200 p-2 text-center ">
                   {user.id.slice(0, 3)}...
                 </td>
                 <td className="w-[15%] border border-gray-200 p-2 text-center">
@@ -184,24 +198,31 @@ export default function Admin() {
                 className="flex w-full justify-between hover:bg-gray-50"
               >
                 <td className="w-[5%] border border-gray-200 p-2 text-center">
-                  {application.id}
+                  {application.id.slice(0, 3)}...
                 </td>
                 <td className="w-[30%] border border-gray-200 p-2 text-center">
-                  {application.agentName}
+                  {application.user.name}
                 </td>
                 <td className="w-[15%] border border-gray-200 p-2 text-center">
                   {application.status}
                 </td>
                 <td className="w-[30%] border border-gray-200 p-2 text-center">
-                  {application.email}
+                  {application.user.email}
                 </td>
                 <td className="w-[7%]  border border-gray-200 p-2 text-center">
-                  <button
-                    className="mx-1 text-blue-500 hover:text-blue-700"
-                    onClick={() => handleViewApplication(application.id)}
-                  >
-                    <FaEye />
-                  </button>
+                  <Dialog>
+                    <DialogTrigger>
+                      <FaEye className="text-blue-500 hover:text-blue-700" />
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Application Details</DialogTitle>
+                      </DialogHeader>
+                      <div>
+                        <ApplicationView id={application.id} />
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </td>
               </tr>
             ))}
@@ -212,6 +233,7 @@ export default function Admin() {
   );
 }
 
+//
 {
   /**
   <div
