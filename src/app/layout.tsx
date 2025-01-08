@@ -26,7 +26,7 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <SessionProvider session={session}>
-      <html lang="en" className={`${poppins.className}`}>
+      <html lang="en" className={`${poppins.className}`} suppressHydrationWarning>
         <body>
           <QClientProvider>
             {children}
