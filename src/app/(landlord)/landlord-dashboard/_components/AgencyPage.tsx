@@ -12,6 +12,8 @@ import {
 } from "~/components/ui/dialog";
 import { DeleteAgencyConfirmation } from "./DeleteAgencyConfirmation";
 import Link from "next/link";
+import { PropertyList } from "./PropertyList";
+import { Property } from "@prisma/client";
 
 interface AgencyProps {
   agency: {
@@ -25,6 +27,7 @@ interface AgencyProps {
     publish: boolean;
     createdAt: Date;
     updatedAt: Date;
+    properties: Property[];
   };
 }
 
@@ -51,10 +54,14 @@ export const AgencyPage = async ({ agency }: AgencyProps) => {
               Update
             </Button>
             <Dialog>
-              <DialogTrigger>
-                <Button size="lg" variant={"destructive"} className="text-lg">
-                  Delete
-                </Button>
+              <DialogTrigger
+                className={`${buttonVariants({
+                  variant: "destructive",
+                  size: "lg",
+                  className: "!text-lg",
+                })} `}
+              >
+                Delete
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
@@ -132,6 +139,10 @@ export const AgencyPage = async ({ agency }: AgencyProps) => {
           </div>
         </div>
 
+        {/** My property list */}
+        <div className="my-8">
+          <PropertyList properties={agency.properties} />
+        </div>
         {/** Add property link */}
         <Link
           href={`/landlord-dashboard/agency/${agency.id}/add-property`}
