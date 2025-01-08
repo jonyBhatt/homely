@@ -27,7 +27,10 @@ export const getProperties = async (): Promise<Property[] | { error: any }> => {
 };
 
 // Add property to database
-export const addProperty = async (values: z.infer<typeof propertySchema>) => {
+export const addProperty = async (
+  values: z.infer<typeof propertySchema>,
+  id: string,
+) => {
   const user = await getCurrentUser();
   if (!user?.id) {
     return null;
@@ -73,7 +76,11 @@ export const addProperty = async (values: z.infer<typeof propertySchema>) => {
         country,
         image,
         state,
-        agentId: user.id,
+        agency: {
+          connect: {
+            id,
+          },
+        },
       },
     });
     return {
