@@ -9,6 +9,9 @@ async function Agency() {
     where: {
       landlordId: user?.id,
     },
+    include: {
+      properties: true,
+    },
   });
   return (
     <div>
