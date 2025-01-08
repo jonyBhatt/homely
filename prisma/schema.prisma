@@ -190,6 +190,8 @@ model Schedule {
   email    String
   date     String
 
+  approved Boolean @default(false)
+
   createdAt DateTime @default(now())
 
   @@map("schedule")
