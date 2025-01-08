@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
-import { Button } from "~/components/ui/button";
+import { Button, buttonVariants } from "~/components/ui/button";
 
 import {
   Dialog,
@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { DeleteAgencyConfirmation } from "./DeleteAgencyConfirmation";
+import Link from "next/link";
 
 interface AgencyProps {
   agency: {
@@ -130,6 +131,14 @@ export const AgencyPage = async ({ agency }: AgencyProps) => {
             </div>
           </div>
         </div>
+
+        {/** Add property link */}
+        <Link
+          href={`/landlord-dashboard/agency/${agency.id}/add-property`}
+          className={`${buttonVariants()} mt-8 w-full`}
+        >
+          Add property
+        </Link>
       </div>
     </div>
   );
