@@ -197,6 +197,23 @@ export const makeSchedule = async (
   }
 };
 
+/**
+ * Get Schedule when approve false
+ */
+export const getSchedule = async () => {
+  try {
+    const schedule = await prisma.schedule.findMany({
+      where: {
+        approved: false,
+      },
+    });
+    return { message: "Fetched Successfully", schedule };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
 //Wish List
 export const wishList = async (propId: string, userId: string) => {
   try {
