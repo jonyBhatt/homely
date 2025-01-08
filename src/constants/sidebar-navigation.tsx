@@ -55,8 +55,8 @@ export const LandlordSideBarContents = [
     icon: <MdOutlineDashboard />,
   },
   {
-    title: "Bookings",
-    path: "/landlord-dashboard/message",
+    title: "Schedule",
+    path: "/landlord-dashboard/schedule",
     icon: <TbBrandBooking />,
   },
   {
