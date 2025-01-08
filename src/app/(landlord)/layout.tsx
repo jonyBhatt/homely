@@ -12,7 +12,7 @@ export default function LandlordDashboardLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex h-screen ">
+    <div className="flex h-screen " suppressHydrationWarning>
       <div className="w-16 text-white lg:w-64">
         <LandlordSidebar />
         {/* <p>Side bar</p> */}
