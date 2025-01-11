@@ -30,6 +30,11 @@ enum AppStatus {
   REJECTED
 }
 
+enum ReportStatus {
+  PENDING
+  RESOLVED
+}
+
 model User {
   id               String            @id @default(auto()) @map("_id") @db.ObjectId
   name             String?
@@ -48,6 +53,8 @@ model User {
   agentApplication AgentApplication?
   Review           Review[]
   landlordReviews  Review[]          @relation("LandlordReviews")
+  Report           Report[]
+  landlordReport   Report[]          @relation("LandlordReport")
 
   @@map("users")
 }
@@ -177,6 +184,7 @@ model Property {
   schedule  Schedule[]
   wishList  WishList[]
   Review    Review[]
+  Report    Report[]
 
   @@map("property")
 }
@@ -230,4 +238,23 @@ model Review {
   propertyId String?   @db.ObjectId
 
   @@map("reviews")
+}
+
+model Report {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId // Reference to the user who submitted the report
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  propertyId String?   @db.ObjectId // Optional: Reference to the property being reported
+  property   Property? @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  landlordId String? @db.ObjectId // Optional: Reference to the landlord being reported
+  landlord   User?   @relation(fields: [landlordId], references: [id], onDelete: Cascade, name: "LandlordReport")
+
+  description String // Description of the issue
+  status      ReportStatus @default(PENDING) // Report status: PENDING, RESOLVED
+  createdAt   DateTime     @default(now()) // Timestamp when the report was created
+  updatedAt   DateTime     @updatedAt // Timestamp when the report was last updated
+
+  @@map("reports")
 }
