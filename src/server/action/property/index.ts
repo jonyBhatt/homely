@@ -163,7 +163,7 @@ export const getPropById = async (id: string) => {
         id,
       },
       include: {
-        agency: true
+        agency: true,
       },
     });
     return { property };
@@ -251,6 +251,33 @@ export const getWishList = async () => {
 
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return wishList;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getAllPropertiesByAgencyAndOwner = async () => {
+  try {
+    const property = await prisma.property.findMany({
+      select: {
+        title: true,
+        agency: {
+          select: {
+            name: true,
+            landlord: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    return {
+      message: "Fetched",
+      property,
+    };
   } catch (error) {
     console.log(error);
     return null;
