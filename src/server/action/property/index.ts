@@ -163,11 +163,7 @@ export const getPropById = async (id: string) => {
         id,
       },
       include: {
-        agent: {
-          select: {
-            user: true,
-          },
-        },
+        agency: true
       },
     });
     return { property };
