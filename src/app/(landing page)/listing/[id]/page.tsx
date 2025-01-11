@@ -150,27 +150,22 @@ async function SingleProperty({ params }: { params: { id: string } }) {
             </div>
             <div className="my-4 w-full">
               <div className="flex flex-col items-center justify-center rounded-lg bg-secondary p-4 shadow-md">
-                <h2 className="text-lg font-semibold">Landlord Details</h2>
+                <h2 className="text-lg font-semibold">Agency Details</h2>
                 <div className="my-4 flex flex-col items-center justify-center gap-4">
                   <Avatar>
                     <AvatarImage
-                      src={property?.property?.agent?.user.image ?? ""}
+                      src={property?.property?.agency?.image ?? ""}
                     />
                     <AvatarFallback>
-                      {property?.property?.agent?.user.name?.slice(0, 1)}
+                      {property?.property?.agency?.name?.slice(0, 1)}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex flex-col items-center justify-center">
                     <h2 className="text-xl font-semibold">
-                      {property?.property?.agent?.user.name}
+                      {property?.property?.agency?.name}
                     </h2>
-                    <span className="text-center text-base text-muted-foreground">
-                      Role
-                    </span>
                   </div>
-                  <Link
-                    href={`/profile/${property?.property?.agent?.user?.id}`}
-                  >
+                  <Link href={`/profile/${property?.property?.agency?.id}`}>
                     <Button
                       size={"lg"}
                       className="w-full rounded font-semibold"
