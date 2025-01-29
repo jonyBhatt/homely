@@ -1,6 +1,7 @@
 "use server";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import { updateAgencySchema } from "~/app/(landlord)/landlord-dashboard/_components/UpdateAgency";
 import { CurrentUser } from "~/lib/current-user";
 import prisma from "~/server/db";
 import { agencySchema } from "~/utils/validation";
@@ -99,3 +100,29 @@ export const ReviewAgency = async (
     };
   }
 };
+
+export async function updateAgency(
+  id: string,
+  values: z.infer<typeof updateAgencySchema>,
+) {
+  try {
+    await prisma.agency.update({
+      where: { id },
+      data: {
+        name: values.name,
+        address: values.address,
+        phone: values.phone,
+        email: values.email,
+        image: values.image,
+      },
+    });
+
+    revalidatePath("landlord-dashboard/agency");
+    return {
+      message: "Agency updated successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}

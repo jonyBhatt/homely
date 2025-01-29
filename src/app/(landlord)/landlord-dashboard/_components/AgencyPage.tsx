@@ -14,6 +14,8 @@ import { DeleteAgencyConfirmation } from "./DeleteAgencyConfirmation";
 import Link from "next/link";
 import { PropertyList } from "./PropertyList";
 import { Property } from "@prisma/client";
+import { ScrollArea } from "~/components/ui/scroll-area";
+import { UpdateAgency } from "./UpdateAgency";
 
 interface AgencyProps {
   agency: {
@@ -50,9 +52,25 @@ export const AgencyPage = async ({ agency }: AgencyProps) => {
           />
           {/* <h3 className="text-lg font-medium text-gray-800">{agency.name}</h3> */}
           <div className="flex items-center gap-2">
-            <Button size="lg" className="text-lg">
-              Update
-            </Button>
+            <Dialog>
+              <DialogTrigger
+                className={`${buttonVariants({
+                  size: "lg",
+                  className: "!text-lg",
+                })} `}
+              >
+                Update
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Update Agency</DialogTitle>
+                </DialogHeader>
+                <ScrollArea className="h-[500px] w-full rounded">
+                  <UpdateAgency agency={agency} />
+                </ScrollArea>
+              </DialogContent>
+            </Dialog>
+
             <Dialog>
               <DialogTrigger
                 className={`${buttonVariants({
