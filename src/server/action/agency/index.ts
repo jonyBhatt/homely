@@ -31,7 +31,7 @@ export const createAgency = async (values: z.infer<typeof agencySchema>) => {
       },
     });
     return {
-      success: true,
+      message: "Agency created successfully",
     };
   } catch (error) {
     console.log(error);

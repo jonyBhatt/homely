@@ -10,49 +10,14 @@ interface AgencyProps extends Agency {
     image: string | null;
   };
 }
-// Define the Agency type
-// type Agency = {
-//   image: string;
-//   name: string;
-//   address: string;
-//   phone: string;
-//   email: string;
-//   // landlord: {
-//   //   landlordPhoto: string;
-//   //   landlordName: string;
-//   // };
-// };
-
-// Sample array of agency data
-// const agenciesList: Agency[] = [
-//   {
-//     image: "/images/ag1.jpg",
-//     name: "Agency One",
-//     address: "123 Main St, City A",
-//     phone: "(123) 456-7890",
-//     email: "contact@agencyone.com",
-//     landlordPhoto: "/images/user1.jpg",
-//     landlordName: "John Doe",
-//   },
-//   {
-//     image: "/images/ag2.jpg",
-//     name: "Agency Two",
-//     address: "456 Elm St, City B",
-//     phone: "(987) 654-3210",
-//     email: "contact@agencytwo.com",
-//     landlordPhoto: "/images/user2.jpg",
-//     landlordName: "Jane Smith",
-//   },
-//   // Add more agencies as needed
-// ];
 
 // AgencyCard Component
 const AgencyCard: React.FC<{ agency: AgencyProps }> = ({ agency }) => {
   return (
-    <section className=" transition-all duration-300 hover:scale-110">
+    <section className=" min-w-md w-full transition-all duration-300 hover:scale-110">
       <Link
         href={`/agency/${agency.id}`}
-        className="space-y-4 rounded-lg bg-secondary p-6 text-center shadow-lg"
+        className="h-full min-h-min w-full space-y-4 rounded-lg bg-secondary p-6 text-center shadow-lg"
       >
         <img
           src={agency.image!}

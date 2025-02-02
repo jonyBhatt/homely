@@ -19,23 +19,9 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { AgentForm } from "../_components/AgentForm";
+import { Property } from "@prisma/client";
 
-type Property = {
-  title: string;
-  description: string;
-  price: string;
-  category: string;
-  rooms: string;
-  bedrooms: string;
-  bathrooms: string;
-  garage: string;
-  size: string;
-  address: string;
-  city: string;
-  image?: string;
-  state?: string;
-  country?: string;
-};
+
 // interface SingleAgencyProps extends Agency {
 //   landlord: {
 //     name: string | null;
@@ -58,6 +44,7 @@ export default async function SingleAgency({
           user: true,
         },
       },
+      properties: true,
     },
   });
 
@@ -159,7 +146,7 @@ export default async function SingleAgency({
           Properties
         </h2>
         <div className="col-span-12 grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {properties.map((property, index) => (
+          {agency.properties.map((property, index) => (
             <PropertyCard key={index} property={property} />
           ))}
         </div>
@@ -178,15 +165,12 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => (
       />
     )}
     <h3 className="text-lg font-medium">{property.title}</h3>
-    <p className="text-gray-500">{property.description}</p>
     <p className="font-semibold text-gray-700">{property.price}</p>
     <div className="space-y-1 text-sm text-gray-600">
       <p>
         <strong>Category:</strong> {property.category}
       </p>
-      <p>
-        <strong>Rooms:</strong> {property.rooms}
-      </p>
+   
       <p>
         <strong>Bedrooms:</strong> {property.bedrooms}
       </p>

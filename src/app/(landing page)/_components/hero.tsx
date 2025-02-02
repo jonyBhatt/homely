@@ -15,7 +15,7 @@ export const Hero = () => {
             </p>
           </div>
           <div className="my-4 hidden px-36 md:block">
-            <SearchFilter />
+            {/* <SearchFilter /> */}
           </div>
         </div>
       </div>

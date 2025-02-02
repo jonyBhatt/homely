@@ -55,6 +55,8 @@ model User {
   landlordReviews  Review[]          @relation("LandlordReviews")
   Report           Report[]
   landlordReport   Report[]          @relation("LandlordReport")
+  Property         Property[]
+  schedule         Schedule[]
 
   @@map("users")
 }
@@ -159,25 +161,30 @@ model Agency {
 
 // Property Model: Agents can list properties
 model Property {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  price       String
-  category    String
-  rooms       String
-  bedrooms    String
-  bathrooms   String
-  garage      String
-  size        String
-  address     String
-  city        String
-  image       String? // Optional field
-  state       String? // Optional field
-  country     String? // Optional field
-  agentId     String? @db.ObjectId
-  agent       Agent?  @relation(fields: [agentId], references: [id], onDelete: Cascade)
-  agencyId    String? @db.ObjectId
-  agency      Agency? @relation(fields: [agencyId], references: [id], onDelete: Cascade)
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  //description String
+  price     String
+  category  String
+  bedrooms  String
+  bathrooms String
+  garage    String
+  dining    String
+  kitchen   String
+  size      String
+  address   String
+  city      String
+  image     String? // Optional field
+  state     String? // Optional field
+  country   String? // Optional field
+  agentId   String? @db.ObjectId
+  agent     Agent?  @relation(fields: [agentId], references: [id], onDelete: Cascade)
+
+  landLordId String? @db.ObjectId
+  landlord   User?   @relation(fields: [landLordId], references: [id], onDelete: Cascade)
+
+  agencyId String? @db.ObjectId
+  agency   Agency? @relation(fields: [agencyId], references: [id], onDelete: Cascade)
 
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -197,6 +204,9 @@ model Schedule {
   username String
   email    String
   date     String
+
+  userId String? @db.ObjectId
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   approved Boolean @default(false)
 

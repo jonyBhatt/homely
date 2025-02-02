@@ -29,13 +29,12 @@ export const signUpSchema = z.object({
 
 export const propertySchema = z.object({
   title: z.string().min(1, { message: "Title is required" }),
-  description: z.string().min(1, { message: "Description is required" }),
   price: z.string(),
   category: z.string(),
-
-  rooms: z.string(),
   bedrooms: z.string(),
   bathrooms: z.string(),
+  dining:z.string(),
+  kitchen:z.string(),
   garage: z.string(),
   size: z.string(),
 
@@ -76,9 +75,8 @@ export const agencySchema = z.object({
     ),
 
   image: z.string().optional(),
-  phone: z.string().regex(/^(\+8801(7|6)\d{8})$/, {
-    message:
-      "Phone number must start with +880 and contain 11 digits with 017 or 016 after +880",
+  phone: z.string().regex(/^(\+8801\d{9})$/, {
+    message: "Phone number must start with +880 and contain 11 digits ",
   }),
 });
 

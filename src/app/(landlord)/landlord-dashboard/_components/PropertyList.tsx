@@ -23,9 +23,6 @@ export const PropertyList = ({ properties }: IPropertyList) => {
           <Card key={i}>
             <CardHeader>
               <CardTitle>{property.title}</CardTitle>
-              <CardDescription>
-                {property.description.slice(0, 100)}...
-              </CardDescription>
             </CardHeader>
             <CardContent>
               <Image

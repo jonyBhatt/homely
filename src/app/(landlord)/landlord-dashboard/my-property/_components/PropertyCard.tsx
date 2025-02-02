@@ -27,9 +27,7 @@ export const PropertyCard = ({ property }: PropertyCardProps) => {
       <CardHeader>
         <CardTitle>{property.title}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <p>{property.description.slice(0, 100)}....</p>
-      </CardContent>
+      <CardContent></CardContent>
       <CardFooter className="flex items-center gap-4">
         <Button>Update</Button>
         <Button variant={"destructive"}>Delete</Button>

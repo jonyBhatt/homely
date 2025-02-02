@@ -11,6 +11,8 @@ import prisma from "~/server/db";
 import { propertySchema, scheduleSchema } from "~/utils/validation";
 import { getCurrentUser } from "../user";
 import { auth } from "~/auth";
+import { CurrentUser } from "~/lib/current-user";
+import { connect } from "http2";
 
 export const getProperties = async (): Promise<Property[] | { error: any }> => {
   try {
@@ -29,7 +31,7 @@ export const getProperties = async (): Promise<Property[] | { error: any }> => {
 // Add property to database
 export const addProperty = async (
   values: z.infer<typeof propertySchema>,
-  id: string,
+  id?: string,
 ) => {
   const user = await getCurrentUser();
   if (!user?.id) {
@@ -46,12 +48,12 @@ export const addProperty = async (
     address,
     bathrooms,
     bedrooms,
+    dining,
+    kitchen,
     category,
     city,
-    description,
     garage,
     price,
-    rooms,
     size,
     title,
     country,
@@ -67,18 +69,19 @@ export const addProperty = async (
         bedrooms,
         category,
         city,
-        description,
+        dining,
+        kitchen,
         garage,
         price,
-        rooms,
         size,
         title,
         country,
         image,
         state,
-        agency: {
+        ...(id ? { agency: { connect: { id } } } : {}),
+        landlord: {
           connect: {
-            id,
+            id: user.id,
           },
         },
       },
@@ -134,10 +137,10 @@ export const updateProperty = async (
         bedrooms: fieldValues.data.bedrooms,
         category: fieldValues.data.category,
         city: fieldValues.data.city,
-        description: fieldValues.data.description,
+        dining: fieldValues.data.dining,
+        kitchen: fieldValues.data.kitchen,
         garage: fieldValues.data.garage,
         price: fieldValues.data.price,
-        rooms: fieldValues.data.rooms,
         size: fieldValues.data.size,
         title: fieldValues.data.title,
         country: fieldValues.data.country,
@@ -178,6 +181,8 @@ export const makeSchedule = async (
   values: z.infer<typeof scheduleSchema>,
 ) => {
   const fieldValues = scheduleSchema.safeParse(values);
+  const { user } = await CurrentUser();
+  if (!user) return null;
   if (fieldValues.error) {
     return {
       error: fieldValues.error.message,
@@ -190,6 +195,7 @@ export const makeSchedule = async (
         username: values.username,
         email: values.email,
         date: values.date,
+        userId: user.id,
       },
     });
     return {
@@ -208,6 +214,31 @@ export const getSchedule = async () => {
     const schedule = await prisma.schedule.findMany({
       where: {
         approved: false,
+      },
+    });
+    return { message: "Fetched Successfully", schedule };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getAllScheduleByUser = async () => {
+  const { user } = await CurrentUser();
+  if (!user) return null;
+
+  try {
+    const schedule = await prisma.schedule.findMany({
+      where: {
+        userId: user.id,
+      },
+      include: {
+        property: {
+          select: {
+            title: true,
+            image: true,
+          },
+        },
       },
     });
     return { message: "Fetched Successfully", schedule };

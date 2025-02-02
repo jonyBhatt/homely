@@ -3,13 +3,13 @@ import { FieldValues, UseFormReturn } from "react-hook-form";
 
 type FormValues = {
   title: string;
-  description: string;
   price: string;
   category: string;
-  rooms: string;
   bedrooms: string;
   bathrooms: string;
   garage: string;
+  dining: string;
+  kitchen: string;
   size: string;
   address: string;
   city: string;

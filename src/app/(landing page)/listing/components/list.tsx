@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { Separator } from "~/components/ui/separator";
 import { wishList } from "~/server/action/property";
 import { Button } from "~/components/ui/button";
+import { MdDining, MdKitchen } from "react-icons/md";
 
 interface ListProps {
   properties: Property[];
@@ -67,6 +68,20 @@ export const List = ({ properties }: ListProps) => {
                   <Bath className="h-5 w-5 text-muted-foreground" />
                   <span className="text-balance text-muted-foreground">
                     {property.bathrooms} Bathrooms
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-1 sm:flex-row">
+                  <MdDining className="h-5 w-5 text-muted-foreground" />
+                  <span className="text-balance text-muted-foreground">
+                    {property.dining} Dining
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-1 sm:flex-row">
+                  <MdKitchen className="h-5 w-5 text-muted-foreground" />
+                  <span className="text-balance text-muted-foreground">
+                    {property.kitchen} Kitchen
                   </span>
                 </div>
               </div>

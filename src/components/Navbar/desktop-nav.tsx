@@ -110,6 +110,11 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
                     <Link href="/report">Report</Link>
                   </DropdownMenuItem>
                 )}
+                {session.user.role === "User" && (
+                  <DropdownMenuItem>
+                    <Link href="/schedule">Schedule</Link>
+                  </DropdownMenuItem>
+                )}
                 {session.user.role === "Admin" && (
                   <DropdownMenuItem>
                     <Link href="/a-dashboard">Dashboard</Link>

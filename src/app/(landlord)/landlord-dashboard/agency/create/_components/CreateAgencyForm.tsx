@@ -37,7 +37,10 @@ export const CreateAgencyForm = () => {
     console.log(values);
     toast.promise(createAgency(values), {
       loading: "Creating agency...",
-      success: "Agency created successfully!",
+      success: (data) => {
+        router.push("/landlord-dashboard/agency");
+        return `${data?.message}`;
+      },
       error: "Agency creation failed!",
     });
   }

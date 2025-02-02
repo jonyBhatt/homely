@@ -127,11 +127,7 @@ async function SingleProperty({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            {/** Description */}
-            <div className="mb-4 max-w-3xl bg-gray-100 p-8">
-              <h2 className="mb-4 text-2xl font-semibold">Description</h2>
-              <p className="mt-2 text-sm">{property?.property?.description}</p>
-            </div>
+        
           </div>
 
           {/* Right Section */}
