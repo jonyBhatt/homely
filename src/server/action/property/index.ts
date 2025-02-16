@@ -106,6 +106,7 @@ export const deleteProperty = async (id: string) => {
     });
     return {
       success: true,
+      message: "Delete",
     };
   } catch (error) {
     console.log(error);
@@ -151,6 +152,7 @@ export const updateProperty = async (
     revalidatePath("/l-dashboard/my-property");
     return {
       success: true,
+      message: "Update successful!",
     };
   } catch (error) {
     return null;
@@ -244,6 +246,56 @@ export const getAllScheduleByUser = async () => {
     return { message: "Fetched Successfully", schedule };
   } catch (error) {
     console.log(error);
+    return null;
+  }
+};
+
+/**
+ *  Get  Schedule By Property Property
+ */
+
+/**
+ * Approve Schedule
+ */
+export const approveSchedule = async (scheduleId: string) => {
+  try {
+    const schedule = await prisma.schedule.update({
+      where: {
+        id: scheduleId,
+      },
+      data: {
+        approved: true,
+      },
+    });
+
+    revalidatePath("/landlord-dashboard/schedule");
+
+    return {
+      message: "Schedule Approved Successfully",
+      schedule,
+    };
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
+
+/**
+ * Delete Schedule
+ */
+export const deleteSchedule = async (scheduleId: string) => {
+  try {
+    await prisma.schedule.delete({
+      where: {
+        id: scheduleId,
+      },
+    });
+    revalidatePath("/landlord-dashboard/schedule");
+    return {
+      message: "Schedule Deleted Successfully",
+    };
+  } catch (err) {
+    console.log(err);
     return null;
   }
 };
