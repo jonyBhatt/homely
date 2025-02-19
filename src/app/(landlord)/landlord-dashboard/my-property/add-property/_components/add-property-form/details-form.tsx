@@ -33,9 +33,9 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="bedrooms"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bedrooms</FormLabel>
+              <FormLabel>Num of Bedrooms</FormLabel>
               <FormControl>
-                <Input placeholder="brdrooms" {...field} />
+                <Input placeholder="bedrooms" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -47,7 +47,7 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="dining"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Dining</FormLabel>
+              <FormLabel>Num of Dining</FormLabel>
               <FormControl>
                 <Input placeholder="dining" {...field} />
               </FormControl>
@@ -61,7 +61,7 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="kitchen"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Kitchen</FormLabel>
+              <FormLabel>Num of Kitchen</FormLabel>
               <FormControl>
                 <Input placeholder="kitchen" {...field} />
               </FormControl>
@@ -75,7 +75,7 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="bathrooms"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bathrooms</FormLabel>
+              <FormLabel>Num of Bathrooms</FormLabel>
               <FormControl>
                 <Input placeholder="bathrooms" {...field} />
               </FormControl>
@@ -89,7 +89,7 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="garage"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Garage</FormLabel>
+              <FormLabel>Num of Garage</FormLabel>
               <FormControl>
                 <Input placeholder="garage" {...field} />
               </FormControl>
