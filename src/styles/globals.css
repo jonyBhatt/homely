@@ -129,3 +129,6 @@
   align-items: center;
   justify-content: center;
 }
+.nav-color {
+  background-color: rgba(197, 190, 190, 0.393) !important;
+}
