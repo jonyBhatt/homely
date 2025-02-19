@@ -33,9 +33,9 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="bedrooms"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bedrooms</FormLabel>
+              <FormLabel>Num of Bedrooms</FormLabel>
               <FormControl>
-                <Input placeholder="brdrooms" {...field} />
+                <Input placeholder="num of bedrooms" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -47,9 +47,9 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="dining"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Dining</FormLabel>
+              <FormLabel>Num of Dining</FormLabel>
               <FormControl>
-                <Input placeholder="dining" {...field} />
+                <Input placeholder="num of dining" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -61,9 +61,9 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="kitchen"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Kitchen</FormLabel>
+              <FormLabel>Num of Kitchen</FormLabel>
               <FormControl>
-                <Input placeholder="kitchen" {...field} />
+                <Input placeholder="num of kitchen" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -75,9 +75,9 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="bathrooms"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bathrooms</FormLabel>
+              <FormLabel>Num of Bathrooms</FormLabel>
               <FormControl>
-                <Input placeholder="bathrooms" {...field} />
+                <Input placeholder="num of bathrooms" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -89,9 +89,9 @@ export default function DetailsForm({ form }: { form: FormPropsTypes }) {
           name="garage"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Garage</FormLabel>
+              <FormLabel>Num of Garage</FormLabel>
               <FormControl>
-                <Input placeholder="garage" {...field} />
+                <Input placeholder="num of garage" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
