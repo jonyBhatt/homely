@@ -149,9 +149,7 @@ export default function Admin() {
                   >
                     <FaTrash />
                   </button>
-                  <button className="mx-1 text-blue-500 hover:text-blue-700">
-                    <FaUserEdit />
-                  </button>
+                  
                 </td>
               </tr>
             ))}
