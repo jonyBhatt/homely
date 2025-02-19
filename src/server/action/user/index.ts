@@ -125,11 +125,26 @@ export const getLandlord = async (id: string) => {
   }
 };
 /**
+ * Get all  Landlord
+ */
+export const getLandlords = async () => {
+  try {
+    const landlords = await prisma.landlordApplication.findMany();
+    return {
+      landlords,
+    };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+/**
  * Update role as  Landlord
  */
 export const updateRoleAsLandlord = async (id: string) => {
   try {
-    const user = await prisma.landlordApplication.update({
+    await prisma.landlordApplication.update({
       where: {
         id,
       },
@@ -141,9 +156,13 @@ export const updateRoleAsLandlord = async (id: string) => {
         },
       },
     });
+    await prisma.landlordApplication.delete({
+      where: {
+        id,
+      },
+    });
     return {
       message: "Role updated successfully",
-      user,
     };
   } catch (error) {
     console.log(error);
