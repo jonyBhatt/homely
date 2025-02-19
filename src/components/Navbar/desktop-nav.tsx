@@ -55,27 +55,27 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
       <div className="flex items-center gap-5">
         <Link
           href={"/"}
-          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
+          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} `}
         >
           Home
         </Link>
         <Link
           href={"/listing"}
-          className={`px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
+          className={`px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-white/55" : ""}`}
         >
           Listing
         </Link>
         <Link
           href={"/agency"}
-          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
+          className={` px-8 font-medium transition-all duration-100 ease-in-out  ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-white/55" : ""}`}
         >
           Agency
         </Link>
         <Link
-          href={"/"}
-          className={` px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-black" : ""}`}
+          href={"/landlord"}
+          className={` px-8 font-medium transition-all duration-100 ease-in-out ${isScroll ? "hover:text-primary" : "hover:text-white/60"} ${pathname !== "/" ? "text-white/55" : ""}`}
         >
-          Pricing
+          Apply for Landlords
         </Link>
       </div>
       <div className="flex items-center gap-7">
