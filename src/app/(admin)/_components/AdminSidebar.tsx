@@ -18,11 +18,11 @@ export const AdminSidebar = () => {
           </li>
           <li className="flex items-center justify-start md:justify-start">
             <Link
-              href="/view-applications"
+              href="/admin/landlords"
               className="flex items-center space-x-2 hover:text-gray-300"
             >
               <FaFileAlt className="text-4xl md:text-xl" />
-              <span className="hidden md:block">View Agent Applications</span>
+              <span className="hidden md:block">Landlords</span>
             </Link>
           </li>
         </ul>
