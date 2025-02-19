@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use server";
+import { revalidatePath } from "next/cache";
 import { auth } from "~/auth";
 import { CurrentUser } from "~/lib/current-user";
 import prisma from "~/server/db";
@@ -163,6 +164,26 @@ export const updateRoleAsLandlord = async (id: string) => {
     });
     return {
       message: "Role updated successfully",
+    };
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+/**
+ * Delete User
+ */
+export const deleteUser = async (id: string) => {
+  try {
+    await prisma.user.delete({
+      where: {
+        id,
+      },
+    });
+    revalidatePath("/admin");
+    return {
+      message: "User deleted successfully",
     };
   } catch (error) {
     console.log(error);

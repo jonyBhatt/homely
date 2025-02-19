@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FaEye, FaTrash, FaUserEdit } from "react-icons/fa";
 import { toast } from "sonner";
 import { getAgentApplications } from "~/server/action/agent";
-import { getUsers } from "~/server/action/user";
+import { deleteUser, getUsers } from "~/server/action/user";
 
 import {
   Dialog,
@@ -16,6 +16,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { ApplicationView } from "../_components/ApplicationView";
+import { useRouter } from "next/navigation";
 
 interface IUsers {
   id: string;
@@ -35,6 +36,7 @@ interface IApplications {
 }
 
 export default function Admin() {
+  const router = useRouter();
   const [users, setUsers] = useState<IUsers[]>([]);
   const [applications, setApplications] = useState<IApplications[]>([]);
   const [userSearch, setUserSearch] = useState("");
@@ -64,7 +66,14 @@ export default function Admin() {
   }, []);
 
   const handleDeleteUser = (id: string) => {
-    setUsers(users.filter((user) => user.id !== id));
+    toast.promise(deleteUser(id), {
+      loading: "Updating role....",
+      success: (data) => {
+        router.push("/admin");
+        return `${data?.message}`;
+      },
+      error: "Failed to update role",
+    });
   };
 
   const handleViewApplication = (id: string) => {
@@ -149,7 +158,6 @@ export default function Admin() {
                   >
                     <FaTrash />
                   </button>
-                  
                 </td>
               </tr>
             ))}
