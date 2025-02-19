@@ -21,7 +21,6 @@ import {
 import { AgentForm } from "../_components/AgentForm";
 import { Property } from "@prisma/client";
 
-
 // interface SingleAgencyProps extends Agency {
 //   landlord: {
 //     name: string | null;
@@ -53,7 +52,7 @@ export default async function SingleAgency({
   }
 
   return (
-    <div className="container mx-auto py-24">
+    <div className="container mx-auto py-48">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
         {/** Agency details */}
         <div className="space-y-4 rounded-lg  p-6 text-center ">
@@ -170,7 +169,7 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => (
       <p>
         <strong>Category:</strong> {property.category}
       </p>
-   
+
       <p>
         <strong>Bedrooms:</strong> {property.bedrooms}
       </p>
