@@ -36,29 +36,47 @@ enum ReportStatus {
 }
 
 model User {
-  id               String            @id @default(auto()) @map("_id") @db.ObjectId
-  name             String?
-  email            String?           @unique
-  emailVerified    DateTime?
-  image            String?
-  password         String?
-  accounts         Account[]
-  sessions         Session[]
-  role             UserRole          @default(User)
-  createdAt        DateTime          @default(now())
-  updatedAt        DateTime          @updatedAt
-  agency           Agency[]          @relation("LandlordAgencies") // Landlord can own multiple agencies
-  agent            Agent? // Agents have a one-to-one relation with User
-  wishList         WishList[]
-  agentApplication AgentApplication?
-  Review           Review[]
-  landlordReviews  Review[]          @relation("LandlordReviews")
-  Report           Report[]
-  landlordReport   Report[]          @relation("LandlordReport")
-  Property         Property[]
-  schedule         Schedule[]
+  id                  String                @id @default(auto()) @map("_id") @db.ObjectId
+  name                String?
+  email               String?               @unique
+  emailVerified       DateTime?
+  image               String?
+  password            String?
+  accounts            Account[]
+  sessions            Session[]
+  role                UserRole              @default(User)
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  agency              Agency[]              @relation("LandlordAgencies") // Landlord can own multiple agencies
+  agent               Agent? // Agents have a one-to-one relation with User
+  wishList            WishList[]
+  agentApplication    AgentApplication?
+  Review              Review[]
+  landlordReviews     Review[]              @relation("LandlordReviews")
+  Report              Report[]
+  landlordReport      Report[]              @relation("LandlordReport")
+  Property            Property[]
+  schedule            Schedule[]
+  LandlordApplication LandlordApplication[]
 
   @@map("users")
+}
+
+model LandlordApplication {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  firstName String
+  lastName  String
+  email     String
+  dob       String
+  phone     String
+  nid       String   @unique
+  createdAt DateTime @default(now())
+
+  userId String? @db.ObjectId
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("landlord_application")
 }
 
 model Account {
