@@ -4,7 +4,6 @@ import Link from "next/link";
 import { CiLogout } from "react-icons/ci";
 import { FaFileAlt, FaUsers } from "react-icons/fa";
 
-
 export const AdminSidebar = () => {
   const logOut = async () => {
     await signOut();
@@ -16,7 +15,7 @@ export const AdminSidebar = () => {
         <ul className="w-full">
           <li className="mb-4 flex items-center justify-start md:justify-start">
             <Link
-              href="/manage-users"
+              href="/admin"
               className="flex items-center space-x-2 hover:text-gray-300"
             >
               <FaUsers className="text-4xl md:text-xl" />
