@@ -14,8 +14,8 @@ export const HelpSection = () => {
         </p>
       </div>
       <div className="my-8 flex items-center justify-center">
-        <div className="my-4 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
-          <div className="flex flex-col items-center gap-4 py-8 px-4 transition-all w-[340px] duration-100 ease-in-out hover:shadow-md">
+        <div className="my-4 grid grid-cols-1 place-items-center  gap-4 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
+          <div className="flex w-[340px] flex-col items-center  gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
             <Image
               src="/property-buy.svg"
               alt="buy-property"
@@ -23,7 +23,7 @@ export const HelpSection = () => {
               height={100}
             />
             <h4 className="font-medium">Buy a Property</h4>
-            <span className="text-wrap text-gray-500 text-sm text-center font-normal">
+            <span className="text-wrap text-center text-sm font-normal text-gray-500">
               Nullam sollicitudin blandit eros eu pretium. Nullam maximus
               ultricies auctor.
             </span>
@@ -37,7 +37,7 @@ export const HelpSection = () => {
             </Button>
           </div>
 
-          <div className="flex flex-col items-center gap-4 py-8 px-4 transition-all w-[340px] duration-100 ease-in-out hover:shadow-md">
+          <div className="flex w-[340px] flex-col items-center gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
             <Image
               src="/property-sell.svg"
               alt="buy-property"
@@ -45,7 +45,7 @@ export const HelpSection = () => {
               height={100}
             />
             <h4 className="font-medium">Sell a Property</h4>
-            <span className="text-wrap text-gray-500 text-sm text-center font-normal">
+            <span className="text-wrap text-center text-sm font-normal text-gray-500">
               Nullam sollicitudin blandit eros eu pretium. Nullam maximus
               ultricies auctor.
             </span>
@@ -59,7 +59,7 @@ export const HelpSection = () => {
             </Button>
           </div>
 
-          <div className="flex flex-col items-center gap-4 py-8 px-4 transition-all w-[340px] duration-100 ease-in-out hover:shadow-md">
+          <div className="flex w-[340px] flex-col items-center gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
             <Image
               src="/property-rent.svg"
               alt="buy-property"
@@ -67,7 +67,7 @@ export const HelpSection = () => {
               height={100}
             />
             <h4 className="font-medium">Rent a Property</h4>
-            <span className="text-wrap text-gray-500 text-sm text-center font-normal">
+            <span className="text-wrap text-center text-sm font-normal text-gray-500">
               Nullam sollicitudin blandit eros eu pretium. Nullam maximus
               ultricies auctor.
             </span>

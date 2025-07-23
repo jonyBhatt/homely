@@ -11,7 +11,7 @@ import {
 import { cities } from "~/utils/mock/city-data";
 export const CityProperty = () => {
   return (
-    <div className="my-16 flex flex-col gap-4 py-24 sm:py-16">
+    <div className="my-16  flex flex-col gap-4 py-24 sm:py-16 ">
       <div className="container mx-auto">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center md:gap-0">
           <div className="flex flex-col items-center gap-4 md:items-start md:gap-1 ">
@@ -30,7 +30,7 @@ export const CityProperty = () => {
             <ArrowUpRight className="h-4 w-4 transition-colors duration-100 ease-in-out hover:text-primary/50" />
           </Link>
         </div>
-        <div className="my-4 flex justify-center px-0 sm:px-16 md:block  lg:px-4 xl:px-0">
+        <div className="my-4 flex flex-col justify-center px-0 sm:flex-row  sm:px-16 md:block lg:px-4 xl:px-0">
           <Carousel className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-7xl ">
             <CarouselContent className="-ml-1 ">
               {cities.map((city, index) => (

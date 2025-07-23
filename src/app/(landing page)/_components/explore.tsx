@@ -21,8 +21,8 @@ export const ExploreApartments = () => {
             </p>
           </div>
           <div>
-            <CarouselPrevious className="!relative !-left-0 mr-4 !-translate-y-0" />
-            <CarouselNext className=" !relative !-right-0   !-translate-y-0" />
+            <CarouselPrevious className="!relative !-left-0 mr-4 hidden !-translate-y-0 sm:block" />
+            <CarouselNext className=" !-translate-y- !relative   !-right-0 hidden sm:block" />
           </div>
         </div>
 
