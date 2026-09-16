@@ -14,7 +14,7 @@ export default function HomePage() {
       <HelpSection />
       <FeaturedList />
       <CityProperty />
-      <Testimonial />
+      {/* <Testimonial /> */}
       <Footer />
     </main>
   );
