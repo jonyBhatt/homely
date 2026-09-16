@@ -39,7 +39,7 @@ export const Testimonial = () => {
             </div>
           </div>
 
-          <CarouselContent className="showslides my-8 max-w-sm gap-16  lg:w-full ">
+          <CarouselContent className="my-8 max-w-sm gap-16 lg:w-full ">
             {cData.map((data) => (
               <CarouselItem key={data.id}>
                 <div className="flex flex-col gap-4 overflow-hidden rounded bg-white px-4 pb-3 pt-7 shadow-md sm:px-7">

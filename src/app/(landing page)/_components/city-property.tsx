@@ -11,12 +11,12 @@ import {
 import { cities } from "~/utils/mock/city-data";
 export const CityProperty = () => {
   return (
-    <div className="my-16  flex flex-col gap-4 py-24 sm:py-16 ">
+    <div className="my-16 flex flex-col gap-4 overflow-x-hidden py-24 sm:py-16">
       <div className="container mx-auto">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center md:gap-0">
-          <div className="flex flex-col items-center gap-4 md:items-start md:gap-1 ">
+          <div className="flex min-w-0 flex-col items-center gap-4 md:items-start md:gap-1">
             <h2 className="text-center text-3xl font-medium">
-              Properties by Cities
+              Properties by Cities/Agencies
             </h2>
             <p className="text-center text-sm">
               Aliquam lacinia diam quis lacus euismod
@@ -26,12 +26,12 @@ export const CityProperty = () => {
             href="#"
             className="flex items-center gap-2.5 transition-colors duration-100 ease-in-out hover:text-primary/50"
           >
-            See all Cities
+            See all Agencies
             <ArrowUpRight className="h-4 w-4 transition-colors duration-100 ease-in-out hover:text-primary/50" />
           </Link>
         </div>
         <div className="my-4 flex flex-col justify-center px-0 sm:flex-row  sm:px-16 md:block lg:px-4 xl:px-0">
-          <Carousel className="w-full max-w-xs sm:max-w-sm md:max-w-2xl lg:max-w-7xl ">
+          <Carousel className="w-full max-w-xs overflow-hidden sm:max-w-sm md:max-w-2xl lg:max-w-7xl ">
             <CarouselContent className="-ml-1 ">
               {cities.map((city, index) => (
                 <CarouselItem
@@ -53,7 +53,7 @@ export const CityProperty = () => {
                               <span>{city.property} properties</span>
                             </div>
                             <div className="absolute  -bottom-4 left-4 flex items-center gap-2   duration-150 ease-linear group-hover:bottom-4">
-                              <span className="text-sm">Show City</span>
+                              <span className="text-sm">Show Agency</span>
                               <ArrowUpRight className="h-5 w-5" />
                             </div>
                           </div>
@@ -64,8 +64,8 @@ export const CityProperty = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="hidden" />
+            <CarouselNext className="hidden" />
           </Carousel>
         </div>
       </div>

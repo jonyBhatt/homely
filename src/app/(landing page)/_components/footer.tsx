@@ -55,11 +55,11 @@ export const Footer = () => {
           <p className="text-sm font-semibold text-white">
             Keep Yourself Up to Date
           </p>
-          <div className="flex max-w-lg items-center justify-between rounded-2xl bg-[#212329] p-6">
+          <div className="flex w-full max-w-lg items-center justify-between rounded-2xl bg-[#212329] p-6">
             <input
               type="email"
               placeholder="your email"
-              className="border-0 bg-transparent text-white outline-none"
+              className="min-w-0 flex-1 border-0 bg-transparent text-white outline-none"
             />
             <Button className="bg-transparent hover:bg-transparent">
               Subscribe

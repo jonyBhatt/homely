@@ -15,7 +15,7 @@ export const HelpSection = () => {
       </div>
       <div className="my-8 flex items-center justify-center">
         <div className="my-4 grid grid-cols-1 place-items-center  gap-4 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
-          <div className="flex w-[340px] flex-col items-center  gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
+          <div className="flex w-full max-w-[340px] flex-col items-center gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
             <Image
               src="/property-buy.svg"
               alt="buy-property"
@@ -37,7 +37,7 @@ export const HelpSection = () => {
             </Button>
           </div>
 
-          <div className="flex w-[340px] flex-col items-center gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
+          <div className="flex w-full max-w-[340px] flex-col items-center gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
             <Image
               src="/property-sell.svg"
               alt="buy-property"
@@ -59,7 +59,7 @@ export const HelpSection = () => {
             </Button>
           </div>
 
-          <div className="flex w-[340px] flex-col items-center gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
+          <div className="flex w-full max-w-[340px] flex-col items-center gap-4 px-4 py-8 transition-all duration-100 ease-in-out hover:shadow-md">
             <Image
               src="/property-rent.svg"
               alt="buy-property"

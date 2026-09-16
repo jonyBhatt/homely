@@ -71,7 +71,7 @@
     @apply appearance-none  scroll-smooth border-border md:appearance-auto;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply overflow-x-hidden bg-background text-foreground;
   }
 }
 
@@ -95,11 +95,6 @@
   background: url("/images/hero.jpg");
   background-repeat: no-repeat;
   position: relative;
-}
-
-.showslides {
-  display: flex;
-  flex: 0 0 80%;
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -26,7 +26,7 @@ export const ExploreApartments = () => {
           </div>
         </div>
 
-        <CarouselContent className="showslides my-8 gap-16 ">
+        <CarouselContent className="my-8 gap-16 ">
           {cData.map((data) => (
             <CarouselItem
               className=" group cursor-pointer   md:basis-1/2 lg:basis-1/4"
