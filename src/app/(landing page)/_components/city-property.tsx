@@ -23,7 +23,7 @@ export const CityProperty = () => {
             </p>
           </div>
           <Link
-            href="#"
+            href="/agency"
             className="flex items-center gap-2.5 transition-colors duration-100 ease-in-out hover:text-primary/50"
           >
             See all Agencies
@@ -52,10 +52,13 @@ export const CityProperty = () => {
                               <h2 className="font-semibold">{city.place}</h2>
                               <span>{city.property} properties</span>
                             </div>
-                            <div className="absolute  -bottom-4 left-4 flex items-center gap-2   duration-150 ease-linear group-hover:bottom-4">
+                            <Link
+                              href="/agency"
+                              className="absolute  -bottom-4 left-4 flex items-center gap-2   duration-150 ease-linear group-hover:bottom-4"
+                            >
                               <span className="text-sm">Show Agency</span>
                               <ArrowUpRight className="h-5 w-5" />
-                            </div>
+                            </Link>
                           </div>
                         </div>
                       </CardContent>

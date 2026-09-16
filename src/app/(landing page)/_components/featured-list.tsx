@@ -20,7 +20,7 @@ export const FeaturedList = () => {
             </p>
           </div>
           <Link
-            href="#"
+            href="/listings"
             className="flex items-center  gap-2.5 transition-colors duration-100 ease-in-out hover:text-primary/50"
           >
             See all Properties
