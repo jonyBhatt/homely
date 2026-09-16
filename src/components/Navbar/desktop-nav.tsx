@@ -39,7 +39,7 @@ export const DesktopNav = ({ session }: { session: Session | null }) => {
 
   return (
     <div
-      className={` nav-color flex w-full items-center justify-between rounded p-4 ${isScroll ? " sticky top-0 h-full w-full rounded-md border-0 bg-gray-500 bg-opacity-10 bg-clip-padding px-4 py-2 text-white backdrop-blur-sm backdrop-filter " : "bg-transparent text-white"}  `}
+      className={` flex w-full items-center justify-between rounded p-4 ${isScroll ? " sticky top-0 h-full w-full rounded-md border-0 bg-gray-300 bg-opacity-15 bg-clip-padding px-4 py-2 text-gray-400 backdrop-blur-sm backdrop-filter " : "bg-transparent text-white"}  `}
     >
       <div>
         {isScroll ? (
