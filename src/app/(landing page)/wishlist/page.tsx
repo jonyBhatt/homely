@@ -10,13 +10,18 @@ import { getWishList } from "~/server/action/property";
 export default async function WishList() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const wishes = await getWishList();
-  if (!wishes) return null;
+  if (wishes?.length === 0)
+    return (
+      <div className="flex min-h-dvh flex-col items-center justify-center">
+        <p className="text-black">You do not have any wishlist</p>
+      </div>
+    );
   console.log(wishes);
 
   return (
     <div className="container mx-auto pt-36">
       <div className="grid h-full w-full grid-cols-1  gap-4 pb-4 sm:grid-cols-2 lg:grid-cols-3">
-        {wishes.map((wish) => (
+        {wishes?.map((wish) => (
           <div
             key={wish.id}
             className="max-w-md overflow-hidden rounded-lg bg-green-50"
